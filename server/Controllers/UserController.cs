@@ -11,14 +11,13 @@ using server.Models;
 namespace server.Controllers;
 
 [Route("api/user")]
+[ApiController]
 public class UserController : ControllerBase
 {
-    private readonly ApplicationDBContext _context;
     private readonly IUserRepo _userRepo;
-    public UserController(ApplicationDBContext context, IUserRepo userRepo)
+    public UserController(IUserRepo userRepo)
     {
         _userRepo = userRepo;
-        _context = context;
     }
 
     [HttpGet]

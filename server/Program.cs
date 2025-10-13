@@ -20,7 +20,7 @@ builder.Services.AddDbContext<ApplicationDBContext>(options =>
 });
 
 builder.Services.AddScoped<IUserRepo, UserRepository>();
-
+builder.Services.AddScoped<IReviewRepo, ReviewRepository>();
 
 var app = builder.Build();
 

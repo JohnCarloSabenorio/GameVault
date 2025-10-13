@@ -1,15 +1,13 @@
-
 using System.ComponentModel.DataAnnotations;
 
-namespace server.Models;
+using server.Models;
+namespace server.DTOs.Review;
 
 
-public class Review
+
+public class ReviewDTO
 {
-    public long Id { get; set; }
-
     [Required]
-    public User? User { get; set; }
 
     public bool? isRecommended { get; set; }
 
