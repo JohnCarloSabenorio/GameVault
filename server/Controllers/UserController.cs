@@ -4,6 +4,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.EntityFrameworkCore;
 using server.Data;
 using server.DTOs.User;
+using server.Interfaces;
 using server.Mappers;
 using server.Models;
 
@@ -13,31 +14,34 @@ namespace server.Controllers;
 public class UserController : ControllerBase
 {
     private readonly ApplicationDBContext _context;
-    public UserController(ApplicationDBContext context)
+    private readonly IUserRepo _userRepo;
+    public UserController(ApplicationDBContext context, IUserRepo userRepo)
     {
+        _userRepo = userRepo;
         _context = context;
     }
 
     [HttpGet]
     public async Task<ActionResult<IEnumerable<UserDTO>>> GetAll()
     {
-        var users = await _context.User.Select(u => u.ToUserDTO()).ToListAsync();
+        var users = await _userRepo.GetAllAsync();
 
+        var usersDTO = users.Select(s => s.ToUserDTO());
 
-        return users;
+        return Ok(usersDTO);
     }
 
     [HttpGet("{id}")]
     public async Task<ActionResult<UserDTO>> GetById(long id)
     {
-        var user = await _context.User.FindAsync(id);
+        var user = await _userRepo.GetByIdAsync(id);
 
         if (user == null)
         {
             return NotFound();
         }
 
-        return user.ToUserDTO();
+        return Ok(user.ToUserDTO());
     }
 
     [HttpPost]
@@ -45,10 +49,9 @@ public class UserController : ControllerBase
     {
         var userModel = userDTO.ToUserFromCreateDTO();
 
-        await _context.User.AddAsync(userModel);
-        await _context.SaveChangesAsync();
+        var userData = await _userRepo.CreateAsync(userModel);
 
-        return CreatedAtAction(nameof(GetById), new { id = userModel.Id }, userModel.ToUserDTO());
+        return CreatedAtAction(nameof(GetById), new { id = userData.Id }, userData.ToUserDTO());
     }
 
     [HttpPut("{id}")]
@@ -56,31 +59,11 @@ public class UserController : ControllerBase
     public async Task<IActionResult> Update(long id, UpdateUserDTO updateDTO)
     {
 
-        var userModel = await _context.User.FirstOrDefaultAsync(x => x.Id == id);
+        var userModel = await _userRepo.UpdateAsync(id, updateDTO);
 
         if (userModel == null)
         {
             return NotFound();
-        }
-
-        userModel.Username = updateDTO.Username;
-        userModel.Email = updateDTO.Email;
-        userModel.Password = updateDTO.Password;
-
-        try
-        {
-            await _context.SaveChangesAsync();
-        }
-        catch (DbUpdateConcurrencyException)
-        {
-            if (!_context.User.Any(u => u.Id == id))
-            {
-                return NotFound();
-            }
-            else
-            {
-                throw;
-            }
         }
 
         return Ok(userModel.ToUserDTO());
@@ -90,16 +73,12 @@ public class UserController : ControllerBase
     public async Task<IActionResult> Delete(long id)
     {
         // Find user
-        var user = await _context.User.FindAsync(id);
+        var user = await _userRepo.DeleteAsync(id);
         // Check if user exists
         if (user == null)
         {
             return NotFound();
         }
-        // Delete the user
-        _context.User.Remove(user);
-        // Save changes
-        await _context.SaveChangesAsync();
 
         return NoContent();
     }
