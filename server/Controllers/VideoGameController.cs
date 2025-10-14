@@ -38,7 +38,7 @@ public class VideoGameController : ControllerBase
     // Create get function
 
     [HttpGet("{id:long}")]
-    public async Task<ActionResult<VideoGameDTO>> GetById(long id)
+    public async Task<ActionResult<VideoGameDTO>> GetById([FromRoute] long id)
     {
         // Get video game
         var videoGame = await _videoGameRepo.GetByIdAsync(id);
@@ -75,7 +75,7 @@ public class VideoGameController : ControllerBase
 
     // Create put function
     [HttpPut("{id:long}")]
-    public async Task<IActionResult> Update(long id, UpdateVideoGameDTO updateVideoGameDTO)
+    public async Task<ActionResult<VideoGameDTO>> Update([FromRoute] long id, UpdateVideoGameDTO updateVideoGameDTO)
     {
         // Check if the model is valid
         if (!ModelState.IsValid)
@@ -93,7 +93,18 @@ public class VideoGameController : ControllerBase
         return Ok(videoGame.ToVideoGameDTO());
     }
 
-
     // Create delete function
+    [HttpDelete("{id:long}")]
 
+    public async Task<IActionResult> Delete([FromRoute] long id)
+    {
+        var videoGame = await _videoGameRepo.DeleteAsync(id);
+
+        if (videoGame == null)
+        {
+            return NotFound();
+        }
+
+        return NoContent();
+    }
 }
