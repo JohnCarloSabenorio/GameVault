@@ -30,14 +30,14 @@ public class UserController : ControllerBase
         return Ok(usersDTO);
     }
 
-    [HttpGet("{id}")]
+    [HttpGet("{id:long}")]
     public async Task<ActionResult<UserDTO>> GetById(long id)
     {
         var user = await _userRepo.GetByIdAsync(id);
 
         if (user == null)
         {
-            return NotFound();
+            return NotFound("User does not exist.");
         }
 
         return Ok(user.ToUserDTO());
@@ -46,6 +46,8 @@ public class UserController : ControllerBase
     [HttpPost]
     public async Task<ActionResult<UserDTO>> Create(CreateUserDTO userDTO)
     {
+        if (!ModelState.IsValid)
+            return BadRequest(ModelState);
         var userModel = userDTO.ToUserFromCreateDTO();
 
         var userData = await _userRepo.CreateAsync(userModel);
@@ -53,22 +55,24 @@ public class UserController : ControllerBase
         return CreatedAtAction(nameof(GetById), new { id = userData.Id }, userData.ToUserDTO());
     }
 
-    [HttpPut("{id}")]
+    [HttpPut("{id:long}")]
 
     public async Task<IActionResult> Update(long id, UpdateUserDTO updateDTO)
     {
+        if (!ModelState.IsValid)
+            return BadRequest(ModelState);
 
         var userModel = await _userRepo.UpdateAsync(id, updateDTO);
 
         if (userModel == null)
         {
-            return NotFound();
+            return NotFound("User does not exist.");
         }
 
         return Ok(userModel.ToUserDTO());
     }
 
-    [HttpDelete("{id}")]
+    [HttpDelete("{id:long}")]
     public async Task<IActionResult> Delete(long id)
     {
         // Find user
@@ -76,7 +80,7 @@ public class UserController : ControllerBase
         // Check if user exists
         if (user == null)
         {
-            return NotFound();
+            return NotFound("User does not exist.");
         }
 
         return NoContent();

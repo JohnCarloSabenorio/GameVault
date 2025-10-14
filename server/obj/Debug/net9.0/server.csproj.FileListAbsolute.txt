@@ -273,3 +273,6 @@ C:\Users\PREDATOR\OneDrive\Documents\GitHub\GameVault\server\bin\Debug\net9.0\Sw
 C:\Users\PREDATOR\OneDrive\Documents\GitHub\GameVault\server\bin\Debug\net9.0\Swashbuckle.AspNetCore.SwaggerGen.dll
 C:\Users\PREDATOR\OneDrive\Documents\GitHub\GameVault\server\bin\Debug\net9.0\Swashbuckle.AspNetCore.SwaggerUI.dll
 C:\Users\PREDATOR\OneDrive\Documents\GitHub\GameVault\server\obj\Debug\net9.0\server.sourcelink.json
+C:\Users\PREDATOR\OneDrive\Documents\GitHub\GameVault\server\bin\Debug\net9.0\Microsoft.AspNetCore.JsonPatch.dll
+C:\Users\PREDATOR\OneDrive\Documents\GitHub\GameVault\server\bin\Debug\net9.0\Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
+C:\Users\PREDATOR\OneDrive\Documents\GitHub\GameVault\server\bin\Debug\net9.0\Newtonsoft.Json.Bson.dll

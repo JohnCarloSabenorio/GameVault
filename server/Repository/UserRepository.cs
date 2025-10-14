@@ -41,12 +41,12 @@ public class UserRepository : IUserRepo
 
     public async Task<List<User>> GetAllAsync()
     {
-        return await _context.User.ToListAsync();
+        return await _context.User.Include(u => u.Reviews).ToListAsync();
     }
 
     public async Task<User?> GetByIdAsync(long id)
     {
-        return await _context.User.FindAsync(id);
+        return await _context.User.Include(u => u.Reviews).FirstOrDefaultAsync(u => u.Id == id);
 
     }
 
@@ -58,12 +58,18 @@ public class UserRepository : IUserRepo
         {
             return null;
         }
-        user.Username = userDTO.Username;
-        user.Email = userDTO.Email;
-        user.Password = userDTO.Password;
+
+        _context.Entry(user).CurrentValues.SetValues(userDTO);
+
 
         await _context.SaveChangesAsync();
 
         return user;
+    }
+
+
+    public async Task<bool> UserExists(long id)
+    {
+        return await _context.User.AnyAsync(u => u.Id == id);
     }
 }

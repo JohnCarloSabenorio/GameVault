@@ -8,7 +8,7 @@ public static class UserMapper
 {
     public static UserDTO ToUserDTO(this User userModel)
     {
-        return new UserDTO { Id = userModel.Id, Username = userModel.Username, Email = userModel.Email };
+        return new UserDTO { Id = userModel.Id, Username = userModel.Username, Email = userModel.Email, Reviews = userModel.Reviews.Select(x => x.ToReviewDTO()).ToList() };
     }
 
     public static User ToUserFromCreateDTO(this CreateUserDTO userDTO)

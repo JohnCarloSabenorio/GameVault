@@ -7,10 +7,12 @@ namespace server.DTOs.Review;
 
 public class ReviewDTO
 {
-    [Required]
 
-    public bool? isRecommended { get; set; }
+    public long UserId { get; set; }
 
-    public string? Description { get; set; }
+    public bool? IsRecommended { get; set; }
 
+    public string? Content { get; set; }
+
+    public DateTime CreatedOn { get; set; } = DateTime.Now;
 }

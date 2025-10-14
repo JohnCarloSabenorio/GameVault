@@ -7,12 +7,9 @@ namespace server.Models;
 public class Review
 {
     public long Id { get; set; }
-
-    [Required]
-    public User? User { get; set; }
-
-    public bool? isRecommended { get; set; }
-
-    public string? Description { get; set; }
+    public long? UserId { get; set; }
+    public bool? IsRecommended { get; set; }
+    public string? Content { get; set; }
+    public DateTime CreatedOn { get; set; } = DateTime.Now;
 
 }

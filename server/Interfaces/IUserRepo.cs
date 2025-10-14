@@ -13,4 +13,8 @@ public interface IUserRepo
     Task<User> CreateAsync(User userData);
     Task<User?> UpdateAsync(long id, UpdateUserDTO userDTO);
     Task<User?> DeleteAsync(long id);
+
+    Task<bool> UserExists(long id);
+
+
 }
