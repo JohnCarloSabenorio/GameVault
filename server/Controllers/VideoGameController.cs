@@ -37,7 +37,42 @@ public class VideoGameController : ControllerBase
 
     // Create get function
 
+    [HttpGet("{id:long}")]
+    public async Task<ActionResult<VideoGameDTO>> GetById(long id)
+    {
+        // Get video game
+        var videoGame = await _videoGameRepo.GetByIdAsync(id);
+        // Check if a video game has been found
+        if (videoGame == null)
+        {
+            return NotFound();
+        }
+        // Return the DTO of the video game
+
+        return videoGame.ToVideoGameDTO();
+    }
+
     // Create post function
+
+    [HttpPost]
+
+    public async Task<ActionResult<VideoGameDTO>> Create(CreateVideoGameDTO createVideoGameDTO)
+    {
+        // Check if the model is valid
+        if (!ModelState.IsValid)
+        {
+            return BadRequest(ModelState);
+        }
+
+        // Convert the createDTO to videoGameModel
+        var videoGameData = createVideoGameDTO.toVideoGameFromCreateDTO();
+
+        // Create video game using the videoGameModel
+        var videoGame = await _videoGameRepo.CreateAsync(videoGameData);
+
+        // Return video game DTO
+        return CreatedAtAction(nameof(GetById), new { id = videoGame.Id }, videoGame.ToVideoGameDTO());
+    }
 
     // Create put function
 
