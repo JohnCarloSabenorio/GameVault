@@ -37,7 +37,10 @@ public class ReviewRepository : IReviewRepo
             reviews = reviews.Where(r => r.IsRecommended == queryObject.IsRecommended);
         }
 
-        return await reviews.ToListAsync();
+
+        var skipNumber = (queryObject.PageNumber - 1) * queryObject.PageSize;
+
+        return await reviews.Skip(skipNumber).Take(queryObject.PageSize).ToListAsync();
     }
 
     public async Task<Review?> GetByIdAsync(long id)

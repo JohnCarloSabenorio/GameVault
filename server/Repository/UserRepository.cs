@@ -56,7 +56,23 @@ public class UserRepository : IUserRepo
             users = users.Where(u => u.Email != null && u.Email.Contains(queryObject.Email));
         }
 
-        return await users.ToListAsync();
+        if (!string.IsNullOrWhiteSpace(queryObject.SortBy))
+        {
+            if (queryObject.SortBy.Equals("Username", StringComparison.OrdinalIgnoreCase))
+            {
+                users = queryObject.IsDescending ? users.OrderByDescending(u => u.Username) : users.OrderBy(u => u.Username);
+            }
+            if (queryObject.SortBy.Equals("Email", StringComparison.OrdinalIgnoreCase))
+            {
+                users = queryObject.IsDescending ? users.OrderByDescending(u => u.Email) : users.OrderBy(u => u.Email);
+            }
+        }
+
+        var skipNumber = (queryObject.PageNumber - 1) * queryObject.PageSize;
+
+
+
+        return await users.Skip(skipNumber).Take(queryObject.PageSize).ToListAsync();
     }
 
     public async Task<User?> GetByIdAsync(long id)
