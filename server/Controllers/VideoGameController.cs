@@ -64,17 +64,35 @@ public class VideoGameController : ControllerBase
             return BadRequest(ModelState);
         }
 
-        // Convert the createDTO to videoGameModel
-        var videoGameData = createVideoGameDTO.toVideoGameFromCreateDTO();
+
 
         // Create video game using the videoGameModel
-        var videoGame = await _videoGameRepo.CreateAsync(videoGameData);
+        var videoGame = await _videoGameRepo.CreateAsync(createVideoGameDTO);
 
         // Return video game DTO
         return CreatedAtAction(nameof(GetById), new { id = videoGame.Id }, videoGame.ToVideoGameDTO());
     }
 
     // Create put function
+    [HttpPut("{id:long}")]
+    public async Task<IActionResult> Update(long id, UpdateVideoGameDTO updateVideoGameDTO)
+    {
+        // Check if the model is valid
+        if (!ModelState.IsValid)
+        {
+            return BadRequest(ModelState);
+        }
+
+        var videoGame = await _videoGameRepo.UpdateAsync(id, updateVideoGameDTO);
+
+        if (videoGame == null)
+        {
+            return NotFound();
+        }
+
+        return Ok(videoGame.ToVideoGameDTO());
+    }
+
 
     // Create delete function
 

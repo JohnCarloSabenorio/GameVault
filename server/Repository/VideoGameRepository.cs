@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using server.Data;
 using server.DTOs.VideoGame;
 using server.Interfaces;
+using server.Mappers;
 using server.Models;
 
 namespace server.Repository;
@@ -17,8 +18,11 @@ public class VideoGameRepository : IVideoGameRepo
     {
         _context = context;
     }
-    public async Task<VideoGame> CreateAsync(VideoGame videoGameData)
+    public async Task<VideoGame> CreateAsync(CreateVideoGameDTO createVideoGameDTO)
     {
+        // Convert the createDTO to videoGameModel
+        var videoGameData = createVideoGameDTO.toVideoGameFromCreateDTO();
+
         await _context.VideoGame.AddAsync(videoGameData);
         await _context.SaveChangesAsync();
 

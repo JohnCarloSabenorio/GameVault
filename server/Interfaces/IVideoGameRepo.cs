@@ -12,7 +12,7 @@ public interface IVideoGameRepo
     Task<List<VideoGame>> GetAllAsync(VideoGameQueryObject videoGameQueryObject);
 
     Task<VideoGame?> GetByIdAsync(long id);
-    Task<VideoGame> CreateAsync(VideoGame videoGameData);
+    Task<VideoGame> CreateAsync(CreateVideoGameDTO createVideoGameDTO);
 
     Task<VideoGame?> UpdateAsync(long id, UpdateVideoGameDTO videoGameDTO);
 
