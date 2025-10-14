@@ -4,6 +4,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.EntityFrameworkCore;
 using server.Data;
 using server.DTOs.User;
+using server.Helpers;
 using server.Interfaces;
 using server.Mappers;
 using server.Models;
@@ -21,9 +22,9 @@ public class UserController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<UserDTO>>> GetAll()
+    public async Task<ActionResult<IEnumerable<UserDTO>>> GetAll([FromQuery] UserQueryObject queryObject)
     {
-        var users = await _userRepo.GetAllAsync();
+        var users = await _userRepo.GetAllAsync(queryObject);
 
         var usersDTO = users.Select(s => s.ToUserDTO());
 

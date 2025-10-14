@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using server.Data;
 using server.DTOs.User;
+using server.Helpers;
 using server.Interfaces;
 using server.Mappers;
 using server.Models;
@@ -39,9 +40,23 @@ public class UserRepository : IUserRepo
         return user;
     }
 
-    public async Task<List<User>> GetAllAsync()
+    public async Task<List<User>> GetAllAsync(UserQueryObject queryObject)
     {
-        return await _context.User.Include(u => u.Reviews).ToListAsync();
+
+        var users = _context.User.Include(u => u.Reviews).AsQueryable();
+
+        // Filtering
+        if (!string.IsNullOrWhiteSpace(queryObject.Username))
+        {
+            users = users.Where(u => u.Username != null && u.Username.Contains(queryObject.Username));
+        }
+
+        if (!string.IsNullOrWhiteSpace(queryObject.Email))
+        {
+            users = users.Where(u => u.Email != null && u.Email.Contains(queryObject.Email));
+        }
+
+        return await users.ToListAsync();
     }
 
     public async Task<User?> GetByIdAsync(long id)

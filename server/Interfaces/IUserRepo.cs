@@ -1,12 +1,13 @@
 namespace server.Interfaces;
 
 using server.DTOs.User;
+using server.Helpers;
 using server.Models;
 
 
 public interface IUserRepo
 {
-    Task<List<User>> GetAllAsync();
+    Task<List<User>> GetAllAsync(UserQueryObject queryObject);
 
     Task<User?> GetByIdAsync(long id);
 

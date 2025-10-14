@@ -4,6 +4,7 @@
 using Microsoft.AspNetCore.Mvc;
 using server.Data;
 using server.DTOs.Review;
+using server.Helpers;
 using server.Interfaces;
 using server.Mappers;
 using server.Models;
@@ -22,11 +23,11 @@ public class ReviewController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<ReviewDTO>>> GetAll()
+    public async Task<ActionResult<IEnumerable<ReviewDTO>>> GetAll([FromQuery] ReviewQueryObject queryObject)
     {
         if (!ModelState.IsValid)
             return BadRequest(ModelState);
-        var reviews = await _reviewRepo.GetAllAsync();
+        var reviews = await _reviewRepo.GetAllAsync(queryObject);
 
         var reviewsDTO = reviews.Select(r => r.ToReviewDTO());
         return Ok(reviewsDTO);

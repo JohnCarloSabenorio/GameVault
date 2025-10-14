@@ -1,6 +1,8 @@
 using Microsoft.EntityFrameworkCore;
+using NuGet.Protocol.Core.Types;
 using server.Data;
 using server.DTOs.Review;
+using server.Helpers;
 using server.Interfaces;
 using server.Models;
 
@@ -26,9 +28,16 @@ public class ReviewRepository : IReviewRepo
         return reviewData;
     }
 
-    public async Task<List<Review>> GetAllAsync()
+    public async Task<List<Review>> GetAllAsync(ReviewQueryObject queryObject)
     {
-        return await _context.Review.ToListAsync();
+        var reviews = _context.Review.AsQueryable();
+
+        if (queryObject.IsRecommended != null)
+        {
+            reviews = reviews.Where(r => r.IsRecommended == queryObject.IsRecommended);
+        }
+
+        return await reviews.ToListAsync();
     }
 
     public async Task<Review?> GetByIdAsync(long id)

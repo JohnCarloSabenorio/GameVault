@@ -2,13 +2,14 @@
 
 using server.DTOs.Review;
 using server.DTOs.User;
+using server.Helpers;
 using server.Models;
 
 namespace server.Interfaces;
 
 public interface IReviewRepo
 {
-    Task<List<Review>> GetAllAsync();
+    Task<List<Review>> GetAllAsync(ReviewQueryObject queryObject);
 
     Task<Review?> GetByIdAsync(long id);
 
