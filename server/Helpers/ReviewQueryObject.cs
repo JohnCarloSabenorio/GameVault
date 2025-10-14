@@ -11,3 +11,4 @@ public class ReviewQueryObject
 
     public int PageSize { get; set; } = 20;
 }
+

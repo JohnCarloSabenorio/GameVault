@@ -48,7 +48,7 @@ public class ReviewRepository : IReviewRepo
         return await _context.Review.FindAsync(id);
     }
 
-    public async Task<Review?> UpdateAsync(long id, UpdateReviewDTO updateUserDTO)
+    public async Task<Review?> UpdateAsync(long id, UpdateReviewDTO updateReviewDTO)
     {
         var review = await _context.Review.FindAsync(id);
 
@@ -57,8 +57,8 @@ public class ReviewRepository : IReviewRepo
             return null;
         }
 
-        review.IsRecommended = updateUserDTO.IsRecommended;
-        review.Content = updateUserDTO.Content;
+        review.IsRecommended = updateReviewDTO.IsRecommended;
+        review.Content = updateReviewDTO.Content;
 
         await _context.SaveChangesAsync();
 

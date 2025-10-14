@@ -15,11 +15,11 @@ public class ReviewController : ControllerBase
 {
 
     public readonly IReviewRepo _reviewRepo;
-    public readonly IUserRepo _userRepo;
-    public ReviewController(IReviewRepo reviewRepo, IUserRepo userRepo)
+    public readonly IVideoGameRepo _videoGameRepo;
+    public ReviewController(IReviewRepo reviewRepo, IVideoGameRepo videoGameRepo)
     {
         _reviewRepo = reviewRepo;
-        _userRepo = userRepo;
+        _videoGameRepo = videoGameRepo;
     }
 
     [HttpGet]
@@ -47,19 +47,21 @@ public class ReviewController : ControllerBase
         return Ok(review.ToReviewDTO());
     }
 
-    [HttpPost("{userId:long}")]
+    [HttpPost("{videoGameId:long}")]
 
-    public async Task<IActionResult> Create([FromRoute] long userId, CreateReviewDTO createReviewDTO)
+    public async Task<IActionResult> Create([FromRoute] long videoGameId, CreateReviewDTO createReviewDTO)
     {
         if (!ModelState.IsValid)
             return BadRequest(ModelState);
-        // Check if user exists
-        if (!await _userRepo.UserExists(userId))
+        // Check if video game exists
+
+
+        if (!await _videoGameRepo.VideoGameExists(videoGameId))
         {
             return BadRequest("User does not exist.");
         }
 
-        var reviewModel = createReviewDTO.ToReviewFromCreateDTO(userId);
+        var reviewModel = createReviewDTO.ToReviewFromCreateDTO(videoGameId);
 
         await _reviewRepo.CreateAsync(reviewModel);
 

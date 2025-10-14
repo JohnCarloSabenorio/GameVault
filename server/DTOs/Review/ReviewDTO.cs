@@ -8,7 +8,7 @@ namespace server.DTOs.Review;
 public class ReviewDTO
 {
 
-    public long UserId { get; set; }
+    public long VideoGameId { get; set; }
 
     public bool? IsRecommended { get; set; }
 

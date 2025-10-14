@@ -1,11 +1,12 @@
 
-namespace server.Helpers;
 
-public class UserQueryObject
+
+public class VideoGameQueryObject
 {
 
-    public string? Username { get; set; } = null;
-    public string? Email { get; set; } = null;
+    public string? Title { get; set; } = null;
+
+    
     public string? SortBy { get; set; } = null;
     public bool IsDescending { get; set; } = false;
 

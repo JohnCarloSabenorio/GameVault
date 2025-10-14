@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Internal;
 using server.Models;
@@ -5,13 +6,14 @@ using server.Models;
 namespace server.Data;
 
 
-public class ApplicationDBContext : DbContext
+public class ApplicationDBContext : IdentityDbContext<User>
 {
     public ApplicationDBContext(DbContextOptions options) : base(options)
     {
 
     }
 
-    public DbSet<User> User { get; set; }
     public DbSet<Review> Review { get; set; }
+
+    public DbSet<VideoGame> VideoGame { get; set; }
 }

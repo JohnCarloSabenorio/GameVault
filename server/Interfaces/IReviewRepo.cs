@@ -1,7 +1,6 @@
 
 
 using server.DTOs.Review;
-using server.DTOs.User;
 using server.Helpers;
 using server.Models;
 
@@ -15,7 +14,7 @@ public interface IReviewRepo
 
     Task<Review> CreateAsync(Review reviewData);
 
-    Task<Review?> UpdateAsync(long id, UpdateReviewDTO updateUserDTO);
+    Task<Review?> UpdateAsync(long id, UpdateReviewDTO updateReviewDTO);
 
     Task<Review?> DeleteAsync(long id);
 }
