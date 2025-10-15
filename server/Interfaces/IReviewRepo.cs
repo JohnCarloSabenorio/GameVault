@@ -12,7 +12,7 @@ public interface IReviewRepo
 
     Task<Review?> GetByIdAsync(long id);
 
-    Task<Review> CreateAsync(Review reviewData);
+    Task<Review> CreateAsync(long videoGameId, CreateReviewDTO createReviewDTO);
 
     Task<Review?> UpdateAsync(long id, UpdateReviewDTO updateReviewDTO);
 

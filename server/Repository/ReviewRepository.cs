@@ -4,6 +4,7 @@ using server.Data;
 using server.DTOs.Review;
 using server.Helpers;
 using server.Interfaces;
+using server.Mappers;
 using server.Models;
 
 namespace server.Repository;
@@ -20,8 +21,10 @@ public class ReviewRepository : IReviewRepo
 
 
 
-    public async Task<Review> CreateAsync(Review reviewData)
+    public async Task<Review> CreateAsync(long videoGameId, CreateReviewDTO createReviewDTO)
     {
+        var reviewData = createReviewDTO.ToReviewFromCreateDTO(videoGameId);
+
         await _context.Review.AddAsync(reviewData);
         await _context.SaveChangesAsync();
 

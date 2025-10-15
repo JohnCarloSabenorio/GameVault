@@ -61,9 +61,8 @@ public class ReviewController : ControllerBase
             return BadRequest("User does not exist.");
         }
 
-        var reviewModel = createReviewDTO.ToReviewFromCreateDTO(videoGameId);
 
-        await _reviewRepo.CreateAsync(reviewModel);
+        var reviewModel = await _reviewRepo.CreateAsync(videoGameId, createReviewDTO);
 
         return CreatedAtAction(nameof(GetById), new { id = reviewModel.Id }, reviewModel.ToReviewDTO());
     }
