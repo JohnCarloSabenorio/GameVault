@@ -1,6 +1,9 @@
+using System.ComponentModel.DataAnnotations.Schema;
+
 namespace server.Models;
 
 
+[Table("VideoGames")]
 public class VideoGame
 {
     public long Id { get; set; }

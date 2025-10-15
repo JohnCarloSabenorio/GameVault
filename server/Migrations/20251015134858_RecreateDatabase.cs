@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace server.Migrations
 {
     /// <inheritdoc />
-    public partial class SeedRoles : Migration
+    public partial class RecreateDatabase : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -53,7 +53,7 @@ namespace server.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "VideoGame",
+                name: "VideoGames",
                 columns: table => new
                 {
                     Id = table.Column<long>(type: "bigint", nullable: false)
@@ -63,7 +63,7 @@ namespace server.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_VideoGame", x => x.Id);
+                    table.PrimaryKey("PK_VideoGames", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -173,7 +173,7 @@ namespace server.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Review",
+                name: "Reviews",
                 columns: table => new
                 {
                     Id = table.Column<long>(type: "bigint", nullable: false)
@@ -185,12 +185,36 @@ namespace server.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Review", x => x.Id);
+                    table.PrimaryKey("PK_Reviews", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Review_VideoGame_VideoGameId",
+                        name: "FK_Reviews_VideoGames_VideoGameId",
                         column: x => x.VideoGameId,
-                        principalTable: "VideoGame",
+                        principalTable: "VideoGames",
                         principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "UserReviews",
+                columns: table => new
+                {
+                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    ReviewId = table.Column<long>(type: "bigint", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_UserReviews", x => new { x.UserId, x.ReviewId });
+                    table.ForeignKey(
+                        name: "FK_UserReviews_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_UserReviews_Reviews_ReviewId",
+                        column: x => x.ReviewId,
+                        principalTable: "Reviews",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.InsertData(
@@ -242,9 +266,14 @@ namespace server.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Review_VideoGameId",
-                table: "Review",
+                name: "IX_Reviews_VideoGameId",
+                table: "Reviews",
                 column: "VideoGameId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_UserReviews_ReviewId",
+                table: "UserReviews",
+                column: "ReviewId");
         }
 
         /// <inheritdoc />
@@ -266,7 +295,7 @@ namespace server.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "Review");
+                name: "UserReviews");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
@@ -275,7 +304,10 @@ namespace server.Migrations
                 name: "AspNetUsers");
 
             migrationBuilder.DropTable(
-                name: "VideoGame");
+                name: "Reviews");
+
+            migrationBuilder.DropTable(
+                name: "VideoGames");
         }
     }
 }

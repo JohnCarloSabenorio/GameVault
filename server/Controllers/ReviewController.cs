@@ -1,6 +1,7 @@
 
 
 
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using server.Data;
 using server.DTOs.Review;
@@ -48,7 +49,7 @@ public class ReviewController : ControllerBase
     }
 
     [HttpPost("{videoGameId:long}")]
-
+    [Authorize]
     public async Task<IActionResult> Create([FromRoute] long videoGameId, CreateReviewDTO createReviewDTO)
     {
         if (!ModelState.IsValid)
@@ -58,7 +59,7 @@ public class ReviewController : ControllerBase
 
         if (!await _videoGameRepo.VideoGameExists(videoGameId))
         {
-            return BadRequest("User does not exist.");
+            return BadRequest("Video game does not exist.");
         }
 
 

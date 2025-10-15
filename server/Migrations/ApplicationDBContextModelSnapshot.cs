@@ -193,7 +193,7 @@ namespace server.Migrations
 
                     b.HasIndex("VideoGameId");
 
-                    b.ToTable("Review");
+                    b.ToTable("Reviews");
                 });
 
             modelBuilder.Entity("server.Models.User", b =>
@@ -261,6 +261,21 @@ namespace server.Migrations
                     b.ToTable("AspNetUsers", (string)null);
                 });
 
+            modelBuilder.Entity("server.Models.UserReview", b =>
+                {
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<long>("ReviewId")
+                        .HasColumnType("bigint");
+
+                    b.HasKey("UserId", "ReviewId");
+
+                    b.HasIndex("ReviewId");
+
+                    b.ToTable("UserReviews");
+                });
+
             modelBuilder.Entity("server.Models.VideoGame", b =>
                 {
                     b.Property<long>("Id")
@@ -277,7 +292,7 @@ namespace server.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("VideoGame");
+                    b.ToTable("VideoGames");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -336,6 +351,35 @@ namespace server.Migrations
                     b.HasOne("server.Models.VideoGame", null)
                         .WithMany("Reviews")
                         .HasForeignKey("VideoGameId");
+                });
+
+            modelBuilder.Entity("server.Models.UserReview", b =>
+                {
+                    b.HasOne("server.Models.Review", "Review")
+                        .WithMany("UserReviews")
+                        .HasForeignKey("ReviewId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("server.Models.User", "User")
+                        .WithMany("UserReviews")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Review");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("server.Models.Review", b =>
+                {
+                    b.Navigation("UserReviews");
+                });
+
+            modelBuilder.Entity("server.Models.User", b =>
+                {
+                    b.Navigation("UserReviews");
                 });
 
             modelBuilder.Entity("server.Models.VideoGame", b =>
