@@ -18,6 +18,8 @@ public class ApplicationDBContext : IdentityDbContext<User>
     public DbSet<Review> Review { get; set; }
     public DbSet<VideoGame> VideoGame { get; set; }
 
+    public DbSet<Genre> Genre { get; set; }
+
     protected override void OnModelCreating(ModelBuilder builder)
     {
         base.OnModelCreating(builder);
