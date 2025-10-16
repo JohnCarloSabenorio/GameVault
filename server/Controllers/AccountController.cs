@@ -86,14 +86,14 @@ public class AccountController : ControllerBase
         }
 
         // Find the user
-        var user = await _userManager.Users.FirstOrDefaultAsync(x => x.UserName == loginDTO.UserName);
+        var user = await _userManager.Users.FirstOrDefaultAsync(x => x.Email == loginDTO.Email);
 
         // Check if user exists
-        if (user == null) return Unauthorized("Invalid username or password!");
+        if (user == null) return Unauthorized("Invalid email or password!");
 
         // Check if password is correct
         var result = await _signInManager.CheckPasswordSignInAsync(user, loginDTO.Password, false);
-        if (!result.Succeeded) return Unauthorized("Invalid username or password!");
+        if (!result.Succeeded) return Unauthorized("Invalid email or password!");
 
         return Ok(new NewUserDTO { UserName = user.UserName, Email = user.Email, Token = _tokenService.CreateToken(user) });
     }

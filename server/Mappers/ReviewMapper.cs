@@ -18,5 +18,4 @@ public static class ReviewMapper
         return new Review { IsRecommended = createReviewDTO.IsRecommended, Content = createReviewDTO.Content, VideoGameId = videoGameId, UserId = userId };
     }
 
-
 }

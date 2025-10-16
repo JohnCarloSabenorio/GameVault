@@ -14,7 +14,7 @@ public interface IReviewRepo
 
     Task<Review> CreateAsync(long videoGameId, string userId, CreateReviewDTO createReviewDTO);
 
-    Task<Review?> UpdateAsync(long id, UpdateReviewDTO updateReviewDTO);
+    Task<Review?> UpdateAsync(long id, string UserId, UpdateReviewDTO updateReviewDTO);
 
     Task<Review?> DeleteAsync(long id);
 }

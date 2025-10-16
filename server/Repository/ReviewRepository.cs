@@ -51,9 +51,9 @@ public class ReviewRepository : IReviewRepo
         return await _context.Review.FindAsync(id);
     }
 
-    public async Task<Review?> UpdateAsync(long id, UpdateReviewDTO updateReviewDTO)
+    public async Task<Review?> UpdateAsync(long id, string userId, UpdateReviewDTO updateReviewDTO)
     {
-        var review = await _context.Review.FindAsync(id);
+        var review = await _context.Review.FirstOrDefaultAsync(r => r.Id == id && r.UserId == userId);
 
         if (review == null)
         {

@@ -78,11 +78,19 @@ public class ReviewController : ControllerBase
     }
 
     [HttpPut("{id:long}")]
+    [Authorize]
     public async Task<IActionResult> Update([FromRoute] long id, UpdateReviewDTO updateReviewDTO)
     {
         if (!ModelState.IsValid)
             return BadRequest(ModelState);
-        var review = await _reviewRepo.UpdateAsync(id, updateReviewDTO);
+
+
+        // Get user 
+        var email = User.GetEmail();
+        var user = await _userManager.FindByEmailAsync(email);
+
+
+        var review = await _reviewRepo.UpdateAsync(id, user.Id, updateReviewDTO);
 
         if (review == null)
         {
