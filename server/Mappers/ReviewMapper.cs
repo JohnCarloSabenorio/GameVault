@@ -10,7 +10,7 @@ public static class ReviewMapper
 {
     public static ReviewDTO ToReviewDTO(this Review review)
     {
-        return new ReviewDTO { Content = review.Content, IsRecommended = review.IsRecommended, VideoGameId = review.VideoGameId, UserId = review.UserId };
+        return new ReviewDTO { Content = review.Content, IsRecommended = review.IsRecommended, VideoGameId = review.VideoGameId, CreatedBy = review.User.UserName };
     }
 
     public static Review ToReviewFromCreateDTO(this CreateReviewDTO createReviewDTO, long videoGameId, string userId)

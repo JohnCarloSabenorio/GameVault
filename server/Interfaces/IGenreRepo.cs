@@ -20,4 +20,5 @@ public interface IGenreRepo
     // Delete
     Task<Genre?> DeleteAsync(long id);
 
+    Task<bool> GenreExists(long id);
 }

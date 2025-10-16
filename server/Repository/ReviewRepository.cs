@@ -43,12 +43,12 @@ public class ReviewRepository : IReviewRepo
 
         var skipNumber = (queryObject.PageNumber - 1) * queryObject.PageSize;
 
-        return await reviews.Skip(skipNumber).Take(queryObject.PageSize).ToListAsync();
+        return await reviews.Skip(skipNumber).Take(queryObject.PageSize).Include(r => r.User).ToListAsync();
     }
 
     public async Task<Review?> GetByIdAsync(long id)
     {
-        return await _context.Review.FindAsync(id);
+        return await _context.Review.Include(r => r.User).FirstOrDefaultAsync(r => r.Id == id);
     }
 
     public async Task<Review?> UpdateAsync(long id, string userId, UpdateReviewDTO updateReviewDTO)

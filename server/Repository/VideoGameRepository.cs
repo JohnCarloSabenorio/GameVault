@@ -44,7 +44,7 @@ public class VideoGameRepository : IVideoGameRepo
 
     public async Task<List<VideoGame>> GetAllAsync(VideoGameQueryObject queryObject)
     {
-        var videoGames = _context.VideoGame.Include(v => v.Reviews).AsQueryable();
+        var videoGames = _context.VideoGame.AsQueryable();
 
 
         if (!string.IsNullOrEmpty(queryObject.Title))
@@ -64,12 +64,12 @@ public class VideoGameRepository : IVideoGameRepo
 
 
 
-        return await videoGames.Skip(skipNumber).Take(queryObject.PageSize).ToListAsync();
+        return await videoGames.Skip(skipNumber).Take(queryObject.PageSize).Include(v => v.Reviews).ThenInclude(r => r.User).ToListAsync();
     }
 
     public async Task<VideoGame?> GetByIdAsync(long id)
     {
-        return await _context.VideoGame.Include(v => v.Reviews).FirstOrDefaultAsync(v => v.Id == id);
+        return await _context.VideoGame.Include(v => v.Reviews).ThenInclude(r => r.User).FirstOrDefaultAsync(v => v.Id == id);
     }
 
     public async Task<VideoGame?> UpdateAsync(long id, UpdateVideoGameDTO updateVideoGameDTO)

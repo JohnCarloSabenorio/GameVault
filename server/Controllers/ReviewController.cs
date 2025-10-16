@@ -19,7 +19,6 @@ public class ReviewController : ControllerBase
 
     private readonly IReviewRepo _reviewRepo;
     private readonly IVideoGameRepo _videoGameRepo;
-
     private readonly UserManager<User> _userManager;
     public ReviewController(IReviewRepo reviewRepo, IVideoGameRepo videoGameRepo, UserManager<User> userManager)
     {

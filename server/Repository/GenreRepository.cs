@@ -84,4 +84,9 @@ public class GenreRepository : IGenreRepo
 
         return genre;
     }
+
+    public async Task<bool> GenreExists(long id)
+    {
+        return await _context.Genre.AnyAsync(g => g.Id == id);
+    }
 }
