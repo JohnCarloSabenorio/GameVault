@@ -72,6 +72,11 @@ public class ReviewController : ControllerBase
         var email = User.GetEmail();
         var user = await _userManager.FindByEmailAsync(email);
 
+        if (user == null)
+        {
+            return NotFound("User does not exist.");
+        }
+
         var reviewModel = await _reviewRepo.CreateAsync(videoGameId, user.Id, createReviewDTO);
 
         return CreatedAtAction(nameof(GetById), new { id = reviewModel.Id }, reviewModel.ToReviewDTO());
@@ -89,6 +94,10 @@ public class ReviewController : ControllerBase
         var email = User.GetEmail();
         var user = await _userManager.FindByEmailAsync(email);
 
+        if (user == null)
+        {
+            return NotFound("User does not exist.");
+        }
 
         var review = await _reviewRepo.UpdateAsync(id, user.Id, updateReviewDTO);
 

@@ -7,6 +7,7 @@ namespace server.Models;
 public class Genre
 {
     public long Id { get; set; }
-
     public string? Name { get; set; }
+    public List<VideoGameGenre> VideoGameGenres { get; set; } = new List<VideoGameGenre>();
+
 }

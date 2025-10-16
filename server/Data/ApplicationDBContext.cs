@@ -20,9 +20,17 @@ public class ApplicationDBContext : IdentityDbContext<User>
 
     public DbSet<Genre> Genre { get; set; }
 
+    public DbSet<VideoGameGenre> VideoGameGenre { get; set; }
     protected override void OnModelCreating(ModelBuilder builder)
     {
         base.OnModelCreating(builder);
+
+        // Composite keys
+        builder.Entity<VideoGameGenre>(x => x.HasKey(p => new { p.GenreId, p.VideoGameId }));
+
+        // video game & genre many-to-many relationship
+        builder.Entity<VideoGameGenre>().HasOne(x => x.VideoGame).WithMany(x => x.VideoGameGenres).HasForeignKey(p => p.VideoGameId);
+        builder.Entity<VideoGameGenre>().HasOne(x => x.Genre).WithMany(x => x.VideoGameGenres).HasForeignKey(p => p.GenreId);
 
         List<IdentityRole> roles = new List<IdentityRole>
         {
