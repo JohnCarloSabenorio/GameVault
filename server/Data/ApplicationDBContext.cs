@@ -18,16 +18,9 @@ public class ApplicationDBContext : IdentityDbContext<User>
     public DbSet<Review> Review { get; set; }
     public DbSet<VideoGame> VideoGame { get; set; }
 
-    public DbSet<UserReview> UserReview { get; set; }
-
     protected override void OnModelCreating(ModelBuilder builder)
     {
         base.OnModelCreating(builder);
-        builder.Entity<UserReview>(x => x.HasKey(ur => new { ur.UserId, ur.ReviewId }));
-
-        builder.Entity<UserReview>().HasOne(ur => ur.User).WithMany(u => u.UserReviews).HasForeignKey(ur => ur.UserId);
-        builder.Entity<UserReview>().HasOne(ur => ur.Review).WithMany(u => u.UserReviews).HasForeignKey(ur => ur.ReviewId);
-
 
         List<IdentityRole> roles = new List<IdentityRole>
         {

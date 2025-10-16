@@ -2,9 +2,11 @@
 
 
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using server.Data;
 using server.DTOs.Review;
+using server.Extensions;
 using server.Helpers;
 using server.Interfaces;
 using server.Mappers;
@@ -15,12 +17,15 @@ using server.Models;
 public class ReviewController : ControllerBase
 {
 
-    public readonly IReviewRepo _reviewRepo;
-    public readonly IVideoGameRepo _videoGameRepo;
-    public ReviewController(IReviewRepo reviewRepo, IVideoGameRepo videoGameRepo)
+    private readonly IReviewRepo _reviewRepo;
+    private readonly IVideoGameRepo _videoGameRepo;
+
+    private readonly UserManager<User> _userManager;
+    public ReviewController(IReviewRepo reviewRepo, IVideoGameRepo videoGameRepo, UserManager<User> userManager)
     {
         _reviewRepo = reviewRepo;
         _videoGameRepo = videoGameRepo;
+        _userManager = userManager;
     }
 
     [HttpGet]
@@ -63,7 +68,11 @@ public class ReviewController : ControllerBase
         }
 
 
-        var reviewModel = await _reviewRepo.CreateAsync(videoGameId, createReviewDTO);
+        // Get user 
+        var email = User.GetEmail();
+        var user = await _userManager.FindByEmailAsync(email);
+
+        var reviewModel = await _reviewRepo.CreateAsync(videoGameId, user.Id, createReviewDTO);
 
         return CreatedAtAction(nameof(GetById), new { id = reviewModel.Id }, reviewModel.ToReviewDTO());
     }

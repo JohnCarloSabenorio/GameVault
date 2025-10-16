@@ -81,6 +81,8 @@ public class VideoGameRepository : IVideoGameRepo
             return null;
         }
 
+        updateVideoGameDTO.Description = string.IsNullOrWhiteSpace(updateVideoGameDTO.Description) ? "No description available." : updateVideoGameDTO.Description;
+
         _context.Entry(videoGame).CurrentValues.SetValues(updateVideoGameDTO);
 
         await _context.SaveChangesAsync();

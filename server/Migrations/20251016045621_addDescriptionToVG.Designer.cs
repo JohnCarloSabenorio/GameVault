@@ -12,8 +12,8 @@ using server.Data;
 namespace server.Migrations
 {
     [DbContext(typeof(ApplicationDBContext))]
-    [Migration("20251015134858_RecreateDatabase")]
-    partial class RecreateDatabase
+    [Migration("20251016045621_addDescriptionToVG")]
+    partial class addDescriptionToVG
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -189,6 +189,9 @@ namespace server.Migrations
                     b.Property<bool?>("IsRecommended")
                         .HasColumnType("bit");
 
+                    b.Property<long?>("UserId")
+                        .HasColumnType("bigint");
+
                     b.Property<long?>("VideoGameId")
                         .HasColumnType("bigint");
 
@@ -264,21 +267,6 @@ namespace server.Migrations
                     b.ToTable("AspNetUsers", (string)null);
                 });
 
-            modelBuilder.Entity("server.Models.UserReview", b =>
-                {
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<long>("ReviewId")
-                        .HasColumnType("bigint");
-
-                    b.HasKey("UserId", "ReviewId");
-
-                    b.HasIndex("ReviewId");
-
-                    b.ToTable("UserReviews");
-                });
-
             modelBuilder.Entity("server.Models.VideoGame", b =>
                 {
                     b.Property<long>("Id")
@@ -289,6 +277,9 @@ namespace server.Migrations
 
                     b.Property<DateTime?>("CreatedOn")
                         .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Title")
                         .HasColumnType("nvarchar(max)");
@@ -354,35 +345,6 @@ namespace server.Migrations
                     b.HasOne("server.Models.VideoGame", null)
                         .WithMany("Reviews")
                         .HasForeignKey("VideoGameId");
-                });
-
-            modelBuilder.Entity("server.Models.UserReview", b =>
-                {
-                    b.HasOne("server.Models.Review", "Review")
-                        .WithMany("UserReviews")
-                        .HasForeignKey("ReviewId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("server.Models.User", "User")
-                        .WithMany("UserReviews")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Review");
-
-                    b.Navigation("User");
-                });
-
-            modelBuilder.Entity("server.Models.Review", b =>
-                {
-                    b.Navigation("UserReviews");
-                });
-
-            modelBuilder.Entity("server.Models.User", b =>
-                {
-                    b.Navigation("UserReviews");
                 });
 
             modelBuilder.Entity("server.Models.VideoGame", b =>

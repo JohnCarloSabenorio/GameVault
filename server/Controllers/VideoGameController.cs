@@ -64,8 +64,6 @@ public class VideoGameController : ControllerBase
             return BadRequest(ModelState);
         }
 
-
-
         // Create video game using the videoGameModel
         var videoGame = await _videoGameRepo.CreateAsync(createVideoGameDTO);
 
