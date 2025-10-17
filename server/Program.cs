@@ -97,8 +97,13 @@ builder.Services.AddScoped<IGenreRepo, GenreRepository>();
 builder.Services.AddScoped<IVideoGameGenreRepo, VideoGameGenreRepository>();
 builder.Services.AddScoped<ITokenService, TokenService>();
 
-
-
+builder.Services.AddHttpClient<IGDBService>(service =>
+{
+    service.BaseAddress = new Uri("https://api.igdb.com/v4/");
+    service.DefaultRequestHeaders.Add("Accept", "application/json");
+    service.DefaultRequestHeaders.Add("Client-ID", builder.Configuration["IGDB:ClientID"]);
+    service.DefaultRequestHeaders.Add("Authorization", $"Bearer {builder.Configuration["IGDB:AccessToken"]}");
+});
 
 var app = builder.Build();
 
@@ -126,6 +131,8 @@ if (app.Environment.IsDevelopment())
 
 
 app.UseHttpsRedirection();
+
+app.UseCors(x => x.AllowAnyMethod().AllowAnyHeader().AllowCredentials().SetIsOriginAllowed(origin => true));
 
 app.UseAuthentication();
 app.UseAuthorization();
