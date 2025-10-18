@@ -17,10 +17,7 @@ public class VideoGameDTO
     public long TotalPlayers { get; set; }
     public long TotalUnitSold { get; set; }
     public long Price { get; set; }
-
     public long? FranchiseId { get; set; }
-    public long? GameEngineId { get; set; }
-    public long? GameModeId { get; set; }
     public long? CoverImageId { get; set; }
     public long? GameStatusId { get; set; }
     public DateTime ReleaseDate { get; set; }
