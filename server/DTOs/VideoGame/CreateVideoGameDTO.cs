@@ -17,8 +17,6 @@ public class CreateVideoGameDTO
     public long TotalPlayers { get; set; }
     public long TotalUnitSold { get; set; }
     public long Price { get; set; }
-    public long? PublisherId { get; set; }
-    public long? DeveloperId { get; set; }
     public long? FranchiseId { get; set; }
     public long? GameEngineId { get; set; }
     public long? GameModeId { get; set; }

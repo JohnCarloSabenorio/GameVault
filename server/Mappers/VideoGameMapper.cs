@@ -9,7 +9,7 @@ public static class VideoGameMapper
 {
     public static VideoGameDTO ToVideoGameDTO(this VideoGame videoGame)
     {
-        return new VideoGameDTO { Id = videoGame.Id, Name = videoGame.Name, Storyline = videoGame.Storyline, Summary = videoGame.Summary, Rating = videoGame.Rating, RatingCount = videoGame.RatingCount, TotalFavorited = videoGame.TotalFavorited, TotalPlayers = videoGame.TotalPlayers, TotalUnitSold = videoGame.TotalUnitSold, Price = videoGame.Price, PublisherId = videoGame.PublisherId, DeveloperId = videoGame.DeveloperId, FranchiseId = videoGame.FranchiseId, GameEngineId = videoGame.GameEngineId, GameModeId = videoGame.GameModeId, CoverImageId = videoGame.CoverImageId, GameStatusId = videoGame.GameStatusId, ReleaseDate = videoGame.ReleaseDate, CreatedAt = videoGame.CreatedAt, UpdatedAt = videoGame.UpdatedAt, Reviews = videoGame.Reviews.Select(r => r.ToReviewDTO()).ToList() };
+        return new VideoGameDTO { Id = videoGame.Id, Name = videoGame.Name, Storyline = videoGame.Storyline, Summary = videoGame.Summary, Rating = videoGame.Rating, RatingCount = videoGame.RatingCount, TotalFavorited = videoGame.TotalFavorited, TotalPlayers = videoGame.TotalPlayers, TotalUnitSold = videoGame.TotalUnitSold, Price = videoGame.Price, FranchiseId = videoGame.FranchiseId, GameEngineId = videoGame.GameEngineId, GameModeId = videoGame.GameModeId, CoverImageId = videoGame.CoverImageId, GameStatusId = videoGame.GameStatusId, ReleaseDate = videoGame.ReleaseDate, CreatedAt = videoGame.CreatedAt, UpdatedAt = videoGame.UpdatedAt, Reviews = videoGame.Reviews.Select(r => r.ToReviewDTO()).ToList() };
     }
 
     public static VideoGame toVideoGameFromCreateDTO(this CreateVideoGameDTO createVideoGameDTO)
@@ -25,8 +25,6 @@ public static class VideoGameMapper
             TotalPlayers = createVideoGameDTO.TotalPlayers,
             TotalUnitSold = createVideoGameDTO.TotalUnitSold,
             Price = createVideoGameDTO.Price,
-            PublisherId = createVideoGameDTO.PublisherId,
-            DeveloperId = createVideoGameDTO.DeveloperId,
             FranchiseId = createVideoGameDTO.FranchiseId,
             GameEngineId = createVideoGameDTO.GameEngineId,
             GameModeId = createVideoGameDTO.GameModeId,
