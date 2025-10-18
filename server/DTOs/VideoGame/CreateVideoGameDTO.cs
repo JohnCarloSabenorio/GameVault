@@ -18,9 +18,8 @@ public class CreateVideoGameDTO
     public long TotalUnitSold { get; set; }
     public long Price { get; set; }
     public long? FranchiseId { get; set; }
-    public long? CoverImageId { get; set; }
-    public long? GameStatusId { get; set; }
+    public long? ImageId { get; set; }
+    public long? StatusId { get; set; }
     public DateTime ReleaseDate { get; set; }
-    public DateTime CreatedAt { get; set; } = DateTime.Now;
-    public DateTime UpdatedAt { get; set; } = DateTime.Now;
+
 }

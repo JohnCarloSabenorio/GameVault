@@ -60,8 +60,7 @@ public class ReviewRepository : IReviewRepo
             return null;
         }
 
-        review.IsRecommended = updateReviewDTO.IsRecommended;
-        review.Content = updateReviewDTO.Content;
+        _context.Entry(review).CurrentValues.SetValues(updateReviewDTO);
 
         await _context.SaveChangesAsync();
 

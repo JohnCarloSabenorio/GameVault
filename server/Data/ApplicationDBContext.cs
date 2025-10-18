@@ -17,9 +17,10 @@ public class ApplicationDBContext : IdentityDbContext<User>
 
     public DbSet<Review> Review { get; set; }
     public DbSet<VideoGame> VideoGame { get; set; }
-
     public DbSet<Genre> Genre { get; set; }
-
+    public DbSet<Franchise> Franchise { get; set; }
+    public DbSet<Status> Status { get; set; }
+    public DbSet<Image> Image { get; set; }
     public DbSet<VideoGameGenre> VideoGameGenre { get; set; }
     protected override void OnModelCreating(ModelBuilder builder)
     {

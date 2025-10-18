@@ -9,7 +9,26 @@ public static class VideoGameMapper
 {
     public static VideoGameDTO ToVideoGameDTO(this VideoGame videoGame)
     {
-        return new VideoGameDTO { Id = videoGame.Id, Name = videoGame.Name, Storyline = videoGame.Storyline, Summary = videoGame.Summary, Rating = videoGame.Rating, RatingCount = videoGame.RatingCount, TotalFavorited = videoGame.TotalFavorited, TotalPlayers = videoGame.TotalPlayers, TotalUnitSold = videoGame.TotalUnitSold, Price = videoGame.Price, FranchiseId = videoGame.FranchiseId, CoverImageId = videoGame.CoverImageId, GameStatusId = videoGame.GameStatusId, ReleaseDate = videoGame.ReleaseDate, CreatedAt = videoGame.CreatedAt, UpdatedAt = videoGame.UpdatedAt, Reviews = videoGame.Reviews.Select(r => r.ToReviewDTO()).ToList() };
+        return new VideoGameDTO
+        {
+            Id = videoGame.Id,
+            Name = videoGame.Name,
+            Storyline = videoGame.Storyline,
+            Summary = videoGame.Summary,
+            Rating = videoGame.Rating,
+            RatingCount = videoGame.RatingCount,
+            TotalFavorited = videoGame.TotalFavorited,
+            TotalPlayers = videoGame.TotalPlayers,
+            TotalUnitSold = videoGame.TotalUnitSold,
+            Price = videoGame.Price,
+            FranchiseId = videoGame.FranchiseId,
+            ImageId = videoGame.ImageId,
+            StatusId = videoGame.StatusId,
+            ReleaseDate = videoGame.ReleaseDate,
+            CreatedAt = videoGame.CreatedAt,
+            UpdatedAt = videoGame.UpdatedAt,
+            Reviews = videoGame.Reviews.Select(r => r.ToReviewDTO()).ToList()
+        };
     }
 
     public static VideoGame toVideoGameFromCreateDTO(this CreateVideoGameDTO createVideoGameDTO)
@@ -26,11 +45,9 @@ public static class VideoGameMapper
             TotalUnitSold = createVideoGameDTO.TotalUnitSold,
             Price = createVideoGameDTO.Price,
             FranchiseId = createVideoGameDTO.FranchiseId,
-            CoverImageId = createVideoGameDTO.CoverImageId,
-            GameStatusId = createVideoGameDTO.GameStatusId,
+            StatusId = createVideoGameDTO.StatusId,
+            ImageId = createVideoGameDTO.ImageId,
             ReleaseDate = createVideoGameDTO.ReleaseDate,
-            CreatedAt = createVideoGameDTO.CreatedAt,
-            UpdatedAt = createVideoGameDTO.UpdatedAt,
         };
     }
 }

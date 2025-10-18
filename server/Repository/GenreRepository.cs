@@ -40,8 +40,10 @@ public class GenreRepository : IGenreRepo
 
     public async Task<List<Genre>> GetAllAsync(GenreQueryObject queryObject)
     {
+        // Create a query statement
         var genres = _context.Genre.AsQueryable();
 
+        // Check the query objects
         if (!string.IsNullOrEmpty(queryObject.SortBy))
         {
             if (queryObject.SortBy.Equals("Name", StringComparison.OrdinalIgnoreCase))
@@ -50,8 +52,10 @@ public class GenreRepository : IGenreRepo
             }
         }
 
+        // Determine number of elements to be skipped
         var skipNumber = (queryObject.PageNumber - 1) * queryObject.PageSize;
 
+        // Return all data
         return await genres.Skip(skipNumber).Take(queryObject.PageSize).ToListAsync();
     }
 
