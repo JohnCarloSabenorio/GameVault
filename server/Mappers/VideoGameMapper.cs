@@ -9,11 +9,32 @@ public static class VideoGameMapper
 {
     public static VideoGameDTO ToVideoGameDTO(this VideoGame videoGame)
     {
-        return new VideoGameDTO { Title = videoGame.Title, Description = videoGame.Description, CreatedOn = videoGame.CreatedOn, Reviews = videoGame.Reviews.Select(r => r.ToReviewDTO()).ToList() };
+        return new VideoGameDTO { Id = videoGame.Id, Name = videoGame.Name, Storyline = videoGame.Storyline, Summary = videoGame.Summary, Rating = videoGame.Rating, RatingCount = videoGame.RatingCount, TotalFavorited = videoGame.TotalFavorited, TotalPlayers = videoGame.TotalPlayers, TotalUnitSold = videoGame.TotalUnitSold, Price = videoGame.Price, PublisherId = videoGame.PublisherId, DeveloperId = videoGame.DeveloperId, FranchiseId = videoGame.FranchiseId, GameEngineId = videoGame.GameEngineId, GameModeId = videoGame.GameModeId, CoverImageId = videoGame.CoverImageId, GameStatusId = videoGame.GameStatusId, ReleaseDate = videoGame.ReleaseDate, CreatedAt = videoGame.CreatedAt, UpdatedAt = videoGame.UpdatedAt, Reviews = videoGame.Reviews.Select(r => r.ToReviewDTO()).ToList() };
     }
 
     public static VideoGame toVideoGameFromCreateDTO(this CreateVideoGameDTO createVideoGameDTO)
     {
-        return new VideoGame { Title = createVideoGameDTO.Title, Description = createVideoGameDTO.Description, CreatedOn = createVideoGameDTO.CreatedOn };
+        return new VideoGame
+        {
+            Name = createVideoGameDTO.Name,
+            Storyline = createVideoGameDTO.Storyline,
+            Summary = createVideoGameDTO.Summary,
+            Rating = createVideoGameDTO.Rating,
+            RatingCount = createVideoGameDTO.RatingCount,
+            TotalFavorited = createVideoGameDTO.TotalFavorited,
+            TotalPlayers = createVideoGameDTO.TotalPlayers,
+            TotalUnitSold = createVideoGameDTO.TotalUnitSold,
+            Price = createVideoGameDTO.Price,
+            PublisherId = createVideoGameDTO.PublisherId,
+            DeveloperId = createVideoGameDTO.DeveloperId,
+            FranchiseId = createVideoGameDTO.FranchiseId,
+            GameEngineId = createVideoGameDTO.GameEngineId,
+            GameModeId = createVideoGameDTO.GameModeId,
+            CoverImageId = createVideoGameDTO.CoverImageId,
+            GameStatusId = createVideoGameDTO.GameStatusId,
+            ReleaseDate = createVideoGameDTO.ReleaseDate,
+            CreatedAt = createVideoGameDTO.CreatedAt,
+            UpdatedAt = createVideoGameDTO.UpdatedAt,
+        };
     }
 }

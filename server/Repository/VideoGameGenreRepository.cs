@@ -1,7 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using server.Data;
 using server.Interfaces;
-using server.Migrations;
 using server.Models;
 
 namespace server.Repository;

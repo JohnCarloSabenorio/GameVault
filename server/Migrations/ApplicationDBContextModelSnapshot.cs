@@ -196,7 +196,7 @@ namespace server.Migrations
                     b.Property<string>("Content")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("CreatedOn")
+                    b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
                     b.Property<bool?>("IsRecommended")
@@ -291,14 +291,65 @@ namespace server.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
 
-                    b.Property<DateTime?>("CreatedOn")
+                    b.Property<long?>("CoverImageId")
+                        .HasColumnType("bigint");
+
+                    b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("Description")
+                    b.Property<long?>("DeveloperId")
+                        .HasColumnType("bigint");
+
+                    b.Property<long?>("FranchiseId")
+                        .HasColumnType("bigint");
+
+                    b.Property<long?>("GameEngineId")
+                        .HasColumnType("bigint");
+
+                    b.Property<long?>("GameModeId")
+                        .HasColumnType("bigint");
+
+                    b.Property<long?>("GameStatusId")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Title")
+                    b.Property<long>("Price")
+                        .HasColumnType("bigint");
+
+                    b.Property<long?>("PublisherId")
+                        .HasColumnType("bigint");
+
+                    b.Property<long>("Rating")
+                        .HasColumnType("bigint");
+
+                    b.Property<long>("RatingCount")
+                        .HasColumnType("bigint");
+
+                    b.Property<DateTime>("ReleaseDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Storyline")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Summary")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<long>("TotalFavorited")
+                        .HasColumnType("bigint");
+
+                    b.Property<long>("TotalPlayers")
+                        .HasColumnType("bigint");
+
+                    b.Property<long>("TotalUnitSold")
+                        .HasColumnType("bigint");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("datetime2");
 
                     b.HasKey("Id");
 

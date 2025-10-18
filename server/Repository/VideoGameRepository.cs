@@ -47,16 +47,16 @@ public class VideoGameRepository : IVideoGameRepo
         var videoGames = _context.VideoGame.AsQueryable();
 
 
-        if (!string.IsNullOrEmpty(queryObject.Title))
+        if (!string.IsNullOrEmpty(queryObject.Name))
         {
-            videoGames = videoGames.Where(u => u.Title != null && u.Title.Contains(queryObject.Title));
+            videoGames = videoGames.Where(u => u.Name != null && u.Name.Contains(queryObject.Name));
         }
 
         if (!string.IsNullOrEmpty(queryObject.SortBy))
         {
-            if (queryObject.SortBy.Equals("Title", StringComparison.OrdinalIgnoreCase))
+            if (queryObject.SortBy.Equals("Name", StringComparison.OrdinalIgnoreCase))
             {
-                videoGames = queryObject.IsDescending ? videoGames.OrderByDescending(v => v.Title) : videoGames.OrderBy(v => v.Title);
+                videoGames = queryObject.IsDescending ? videoGames.OrderByDescending(v => v.Name) : videoGames.OrderBy(v => v.Name);
             }
         }
 
@@ -80,8 +80,6 @@ public class VideoGameRepository : IVideoGameRepo
         {
             return null;
         }
-
-        updateVideoGameDTO.Description = string.IsNullOrWhiteSpace(updateVideoGameDTO.Description) ? "No description available." : updateVideoGameDTO.Description;
 
         _context.Entry(videoGame).CurrentValues.SetValues(updateVideoGameDTO);
 

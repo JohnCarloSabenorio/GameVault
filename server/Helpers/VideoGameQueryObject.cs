@@ -4,7 +4,7 @@
 public class VideoGameQueryObject
 {
 
-    public string? Title { get; set; } = null;
+    public string? Name { get; set; } = null;
 
     
     public string? SortBy { get; set; } = null;
