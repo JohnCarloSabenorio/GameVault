@@ -1,2 +1,3 @@
 server/appsettings.json
-
+server/bin
+server/obj
