@@ -95,6 +95,7 @@ builder.Services.AddScoped<IReviewRepo, ReviewRepository>();
 builder.Services.AddScoped<IVideoGameRepo, VideoGameRepository>();
 builder.Services.AddScoped<IGenreRepo, GenreRepository>();
 builder.Services.AddScoped<IFranchiseRepo, FranchiseRepository>();
+builder.Services.AddScoped<IStatusRepo, StatusRepository>();
 builder.Services.AddScoped<IVideoGameGenreRepo, VideoGameGenreRepository>();
 builder.Services.AddScoped<ITokenService, TokenService>();
 
