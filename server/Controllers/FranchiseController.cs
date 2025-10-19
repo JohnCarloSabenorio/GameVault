@@ -64,5 +64,41 @@ namespace server.Controllers
 
             return CreatedAtAction(nameof(GetById), new { id = newFranchise.Id }, newFranchise.ToFranchiseDTO());
         }
+
+        [HttpPut("{id:long}")]
+
+        public async Task<ActionResult<FranchiseDTO>> Update([FromRoute] long id, UpdateFranchiseDTO updateFranchiseDTO)
+        {
+            // Check if inputs are valid 
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            // Update franchise
+            var updatedFranchise = await _franchiseRepo.UpdateAsync(id, updateFranchiseDTO);
+            // If franchise is null, return not found
+            if (updatedFranchise == null)
+            {
+                return NotFound("Franchise does not exist.");
+            }
+            // Convert to dto and return
+            return updatedFranchise.ToFranchiseDTO();
+        }
+
+
+        [HttpDelete("{id:long}")]
+
+        public async Task<IActionResult> Delete([FromRoute] long id)
+        {
+            // Find and delete franchise
+            var deletedFranchise = await _franchiseRepo.DeleteAsync(id);
+            // If franchise is null return not found
+            if (deletedFranchise == null)
+            {
+                return NotFound("Franchise does not exist.");
+            }
+
+            return NoContent();
+        }
     }
 }
