@@ -25,7 +25,7 @@ public class VideoGame
     public DateTime UpdatedAt { get; set; } = DateTime.Now;
     public Franchise Franchise { get; set; }
     public Status Status { get; set; }
-    public Status Image { get; set; }
+    public Image Image { get; set; }
 
     public List<Review> Reviews { get; set; } = new List<Review>();
     public List<VideoGameGenre> VideoGameGenres { get; set; } = new List<VideoGameGenre>();

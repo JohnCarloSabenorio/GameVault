@@ -3,14 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace server.Models
+namespace server.DTOs.Image
 {
-    public class Image
+    public class ImageDTO
     {
         public long Id { get; set; }
 
         public string Name { get; set; } = String.Empty;
-        public DateTime CreatedAt { get; set; } = DateTime.Now;
-        public DateTime UpdatedAt { get; set; } = DateTime.Now;
     }
 }
