@@ -12,7 +12,7 @@ namespace server.Interfaces
     {
         Task<List<Image>> GetAllAsync(ImageQueryObject imageQueryObject);
         Task<Image?> GetByIdAsync(long id);
-        Task<Image?> CreateAsync(CreateImageDTO createImageDTO);
+        Task<Image> CreateAsync(CreateImageDTO createImageDTO);
         Task<Image?> UpdateAsync(long id, UpdateImageDTO updateImageDTO);
         Task<Image?> DeleteAsync(long id);
     }

@@ -21,7 +21,7 @@ namespace server.Repository
         {
             _context = context;
         }
-        public async Task<Status?> CreateAsync(CreateStatusDTO createStatusDTO)
+        public async Task<Status> CreateAsync(CreateStatusDTO createStatusDTO)
         {
             // Convert create dto to status model data
             var status = createStatusDTO.ToStatusFromCreateDTO();

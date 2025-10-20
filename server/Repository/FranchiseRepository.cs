@@ -24,7 +24,7 @@ public class FranchiseRepository : IFranchiseRepo
         _context = context;
     }
 
-    public async Task<Franchise?> CreateAsync(CreateFranchiseDTO createFranchiseDTO)
+    public async Task<Franchise> CreateAsync(CreateFranchiseDTO createFranchiseDTO)
     {
         // Convert
         var franchiseData = createFranchiseDTO.ToFranchiseFromCreateDTO();

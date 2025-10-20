@@ -21,7 +21,7 @@ namespace server.Repository
             _context = context;
         }
 
-        public async Task<Image?> CreateAsync(CreateImageDTO createImageDTO)
+        public async Task<Image> CreateAsync(CreateImageDTO createImageDTO)
         {
             var imageData = createImageDTO.ToImageFromCreateDTO();
 

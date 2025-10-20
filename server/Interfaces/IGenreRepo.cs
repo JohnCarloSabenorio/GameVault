@@ -14,7 +14,7 @@ public interface IGenreRepo
 
     // Create
 
-    Task<Genre?> CreateAsync(CreateGenreDTO createGenreDTO);
+    Task<Genre> CreateAsync(CreateGenreDTO createGenreDTO);
     // Update
     Task<Genre?> UpdateAsync(long id, UpdateGenreDTO updateGenreDTO);
     // Delete

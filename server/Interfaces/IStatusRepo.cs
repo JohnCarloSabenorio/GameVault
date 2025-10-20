@@ -12,7 +12,7 @@ namespace server.Interfaces
     {
         Task<List<Status>> GetAllAsync(StatusQueryObject statusQueryObject);
         Task<Status?> GetByIdAsync(long id);
-        Task<Status?> CreateAsync(CreateStatusDTO createStatusDTO);
+        Task<Status> CreateAsync(CreateStatusDTO createStatusDTO);
         Task<Status?> UpdateAsync(long id, UpdateStatusDTO updateStatusDTO);
         Task<Status?> DeleteAsync(long id);
     }

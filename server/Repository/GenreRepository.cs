@@ -19,7 +19,7 @@ public class GenreRepository : IGenreRepo
     {
         _context = context;
     }
-    public async Task<Genre?> CreateAsync(CreateGenreDTO createGenreDTO)
+    public async Task<Genre> CreateAsync(CreateGenreDTO createGenreDTO)
     {
         // Convert create genre DTO to genre model
         var genreData = createGenreDTO.ToGenreFromCreateGenreDTO();

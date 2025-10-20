@@ -12,7 +12,7 @@ namespace server.Interfaces
     {
         Task<List<Franchise>> GetAllAsync(FranchiseQueryObject franchiseQueryObject);
         Task<Franchise?> GetByIdAsync(long id);
-        Task<Franchise?> CreateAsync(CreateFranchiseDTO createFranchiseDTO);
+        Task<Franchise> CreateAsync(CreateFranchiseDTO createFranchiseDTO);
         Task<Franchise?> UpdateAsync(long id, UpdateFranchiseDTO updateFranchiseDTO);
         Task<Franchise?> DeleteAsync(long id);
     }
