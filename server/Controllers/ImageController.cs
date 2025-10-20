@@ -86,9 +86,7 @@ namespace server.Controllers
                 return NotFound("Image does not exist.");
             }
 
-            return NoContent(); 
+            return NoContent();
         }
-
-
     }
 }
