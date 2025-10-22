@@ -9,9 +9,6 @@ namespace server.DTOs.Publisher
     public class PublisherDTO
     {
 
-        [Required]
-        [MinLength(1, ErrorMessage = "Publisher name length must be atleast 1 character long.")]
-        [MaxLength(350, ErrorMessage = "Publisher name length cannot exceed 350 long.")]
         public string? Name { get; set; }
         public DateOnly YearFounded { get; set; } = DateOnly.FromDateTime(DateTime.Now);
         public string? Country { get; set; }
