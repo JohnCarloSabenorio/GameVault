@@ -2,22 +2,19 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using NuGet.Protocol.Plugins;
-
-namespace server.Models
+using System.ComponentModel.DataAnnotations;
+namespace server.DTOs.Publisher
 {
-    public class Publisher
+    public class UpdatePublisherDTO
     {
-        public long Id { get; set; }
+        [Required]
+        [MinLength(1, ErrorMessage = "Publisher name length must be atleast 1 character long.")]
+        [MaxLength(350, ErrorMessage = "Publisher name length cannot exceed 350 long.")]
         public string? Name { get; set; }
         public DateOnly YearFounded { get; set; } = DateOnly.FromDateTime(DateTime.Now);
         public string? Country { get; set; }
         public string? Website { get; set; }
         public string? Description { get; set; }
         public long? ImageId { get; set; }
-
-        public Image Image { get; set; }
-        public DateTime CreatedAt { get; set; } = DateTime.Now;
-        public DateTime UpdatedAt { get; set; } = DateTime.Now;
     }
 }
