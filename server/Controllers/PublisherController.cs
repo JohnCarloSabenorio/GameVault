@@ -52,7 +52,7 @@ namespace server.Controllers
                 return BadRequest(ModelState);
             }
 
-            var publisherData = createPublisherDTO.ToPublisherFromCreateDTO();
+            var publisherData = await _publisherRepo.CreateAsync(createPublisherDTO);
 
             return CreatedAtAction(nameof(GetById), new { id = publisherData.Id }, publisherData.ToPublisherDTO());
         }
@@ -84,7 +84,7 @@ namespace server.Controllers
                 return NotFound("Publisher does not exist.");
             }
 
-            return Ok(deletedPublisher.ToPublisherDTO());
+            return NoContent();
         }
     }
 }

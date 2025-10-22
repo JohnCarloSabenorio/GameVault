@@ -69,7 +69,7 @@ namespace server.Controllers
                 return NotFound("Developer does not exist.");
             }
 
-            return updatedDev.ToDeveloperDTO();
+            return Ok(updatedDev.ToDeveloperDTO());
         }
 
 
@@ -85,7 +85,7 @@ namespace server.Controllers
                 return NotFound("Developer does not exist.");
             }
 
-            return deletedDev.ToDeveloperDTO();
+            return NoContent();
         }
     }
 }
