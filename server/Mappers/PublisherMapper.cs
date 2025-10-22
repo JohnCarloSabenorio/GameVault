@@ -10,11 +10,11 @@ namespace server.Mappers
 {
     public static class PublisherMapper
     {
-        public static PublisherDTO ToPublisherDTO(Publisher publisher)
+        public static PublisherDTO ToPublisherDTO(this Publisher publisher)
         {
             return new PublisherDTO { Name = publisher.Name, YearFounded = publisher.YearFounded, Country = publisher.Country, Website = publisher.Website, Description = publisher.Description, ImageId = publisher.ImageId };
         }
-        public static Publisher ToPublisherFromCreateDTO(long id, CreatePublisherDTO createPublisherDTO)
+        public static Publisher ToPublisherFromCreateDTO(this CreatePublisherDTO createPublisherDTO)
         {
             return new Publisher
             {
