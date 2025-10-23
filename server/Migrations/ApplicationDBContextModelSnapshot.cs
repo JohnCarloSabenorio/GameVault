@@ -540,6 +540,37 @@ namespace server.Migrations
                     b.ToTable("VideoGames");
                 });
 
+            modelBuilder.Entity("server.Models.VideoGameCollection", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("VideoGameCollection");
+                });
+
             modelBuilder.Entity("server.Models.VideoGameGenre", b =>
                 {
                     b.Property<long>("GenreId")
@@ -674,6 +705,15 @@ namespace server.Migrations
                     b.Navigation("ParentGame");
 
                     b.Navigation("Status");
+                });
+
+            modelBuilder.Entity("server.Models.VideoGameCollection", b =>
+                {
+                    b.HasOne("server.Models.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("server.Models.VideoGameGenre", b =>

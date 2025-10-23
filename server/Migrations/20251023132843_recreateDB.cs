@@ -53,12 +53,30 @@ namespace server.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Franchise",
+                columns: table => new
+                {
+                    Id = table.Column<long>(type: "bigint", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Url = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Franchise", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Genres",
                 columns: table => new
                 {
                     Id = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -66,34 +84,49 @@ namespace server.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "VideoGames",
+                name: "Image",
                 columns: table => new
                 {
                     Id = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Storyline = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Summary = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Rating = table.Column<long>(type: "bigint", nullable: false),
-                    RatingCount = table.Column<long>(type: "bigint", nullable: false),
-                    TotalFavorited = table.Column<long>(type: "bigint", nullable: false),
-                    TotalPlayers = table.Column<long>(type: "bigint", nullable: false),
-                    TotalUnitSold = table.Column<long>(type: "bigint", nullable: false),
-                    Price = table.Column<long>(type: "bigint", nullable: false),
-                    PublisherId = table.Column<long>(type: "bigint", nullable: true),
-                    DeveloperId = table.Column<long>(type: "bigint", nullable: true),
-                    FranchiseId = table.Column<long>(type: "bigint", nullable: true),
-                    GameEngineId = table.Column<long>(type: "bigint", nullable: true),
-                    GameModeId = table.Column<long>(type: "bigint", nullable: true),
-                    CoverImageId = table.Column<long>(type: "bigint", nullable: true),
-                    GameStatusId = table.Column<long>(type: "bigint", nullable: true),
-                    ReleaseDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_VideoGames", x => x.Id);
+                    table.PrimaryKey("PK_Image", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "News",
+                columns: table => new
+                {
+                    Id = table.Column<long>(type: "bigint", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Header = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Content = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_News", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Status",
+                columns: table => new
+                {
+                    Id = table.Column<long>(type: "bigint", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    StatusName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Status", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -203,6 +236,126 @@ namespace server.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "VideoGameCollection",
+                columns: table => new
+                {
+                    Id = table.Column<long>(type: "bigint", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_VideoGameCollection", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_VideoGameCollection_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Developer",
+                columns: table => new
+                {
+                    Id = table.Column<long>(type: "bigint", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CountryOrigin = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    WebsiteUrl = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ImageId = table.Column<long>(type: "bigint", nullable: true),
+                    DateFounded = table.Column<DateOnly>(type: "date", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Developer", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Developer_Image_ImageId",
+                        column: x => x.ImageId,
+                        principalTable: "Image",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Publisher",
+                columns: table => new
+                {
+                    Id = table.Column<long>(type: "bigint", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    YearFounded = table.Column<DateOnly>(type: "date", nullable: false),
+                    Country = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Website = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ImageId = table.Column<long>(type: "bigint", nullable: true),
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Publisher", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Publisher_Image_ImageId",
+                        column: x => x.ImageId,
+                        principalTable: "Image",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "VideoGames",
+                columns: table => new
+                {
+                    Id = table.Column<long>(type: "bigint", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Storyline = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Summary = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Rating = table.Column<long>(type: "bigint", nullable: false),
+                    RatingCount = table.Column<long>(type: "bigint", nullable: false),
+                    TotalFavorited = table.Column<long>(type: "bigint", nullable: false),
+                    TotalPlayers = table.Column<long>(type: "bigint", nullable: false),
+                    TotalUnitSold = table.Column<long>(type: "bigint", nullable: false),
+                    Price = table.Column<long>(type: "bigint", nullable: false),
+                    FranchiseId = table.Column<long>(type: "bigint", nullable: true),
+                    StatusId = table.Column<long>(type: "bigint", nullable: true),
+                    ImageId = table.Column<long>(type: "bigint", nullable: true),
+                    ParentGameId = table.Column<long>(type: "bigint", nullable: true),
+                    ReleaseDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_VideoGames", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_VideoGames_Franchise_FranchiseId",
+                        column: x => x.FranchiseId,
+                        principalTable: "Franchise",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_VideoGames_Image_ImageId",
+                        column: x => x.ImageId,
+                        principalTable: "Image",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_VideoGames_Status_StatusId",
+                        column: x => x.StatusId,
+                        principalTable: "Status",
+                        principalColumn: "Id");
+                    table.ForeignKey(
+                        name: "FK_VideoGames_VideoGames_ParentGameId",
+                        column: x => x.ParentGameId,
+                        principalTable: "VideoGames",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Reviews",
                 columns: table => new
                 {
@@ -212,7 +365,8 @@ namespace server.Migrations
                     UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     IsRecommended = table.Column<bool>(type: "bit", nullable: true),
                     Content = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -236,7 +390,9 @@ namespace server.Migrations
                 columns: table => new
                 {
                     VideoGameId = table.Column<long>(type: "bigint", nullable: false),
-                    GenreId = table.Column<long>(type: "bigint", nullable: false)
+                    GenreId = table.Column<long>(type: "bigint", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -304,6 +460,16 @@ namespace server.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Developer_ImageId",
+                table: "Developer",
+                column: "ImageId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Publisher_ImageId",
+                table: "Publisher",
+                column: "ImageId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Reviews_UserId",
                 table: "Reviews",
                 column: "UserId");
@@ -314,9 +480,34 @@ namespace server.Migrations
                 column: "VideoGameId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_VideoGameCollection_UserId",
+                table: "VideoGameCollection",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_VideoGameGenres_VideoGameId",
                 table: "VideoGameGenres",
                 column: "VideoGameId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_VideoGames_FranchiseId",
+                table: "VideoGames",
+                column: "FranchiseId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_VideoGames_ImageId",
+                table: "VideoGames",
+                column: "ImageId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_VideoGames_ParentGameId",
+                table: "VideoGames",
+                column: "ParentGameId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_VideoGames_StatusId",
+                table: "VideoGames",
+                column: "StatusId");
         }
 
         /// <inheritdoc />
@@ -338,7 +529,19 @@ namespace server.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
+                name: "Developer");
+
+            migrationBuilder.DropTable(
+                name: "News");
+
+            migrationBuilder.DropTable(
+                name: "Publisher");
+
+            migrationBuilder.DropTable(
                 name: "Reviews");
+
+            migrationBuilder.DropTable(
+                name: "VideoGameCollection");
 
             migrationBuilder.DropTable(
                 name: "VideoGameGenres");
@@ -354,6 +557,15 @@ namespace server.Migrations
 
             migrationBuilder.DropTable(
                 name: "VideoGames");
+
+            migrationBuilder.DropTable(
+                name: "Franchise");
+
+            migrationBuilder.DropTable(
+                name: "Image");
+
+            migrationBuilder.DropTable(
+                name: "Status");
         }
     }
 }

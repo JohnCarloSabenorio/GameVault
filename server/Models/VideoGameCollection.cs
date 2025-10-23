@@ -8,11 +8,13 @@ namespace server.Models
     public class VideoGameCollection
     {
         public long Id { get; set; }
-        public long? UserId { get; set; }
+        public string? UserId { get; set; } = string.Empty;
 
         public string Name { get; set; } = string.Empty;
         public string? Description { get; set; }
 
+
+        public User? User { get; set; }
         public DateTime CreatedAt { get; set; } = DateTime.Now;
         public DateTime UpdatedAt { get; set; } = DateTime.Now;
     }

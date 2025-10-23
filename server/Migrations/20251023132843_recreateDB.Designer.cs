@@ -12,8 +12,8 @@ using server.Data;
 namespace server.Migrations
 {
     [DbContext(typeof(ApplicationDBContext))]
-    [Migration("20251019112916_addForeignKeys")]
-    partial class addForeignKeys
+    [Migration("20251023132843_recreateDB")]
+    partial class recreateDB
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -172,6 +172,45 @@ namespace server.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("server.Models.Developer", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
+
+                    b.Property<string>("CountryOrigin")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateOnly>("DateFounded")
+                        .HasColumnType("date");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<long?>("ImageId")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("WebsiteUrl")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ImageId");
+
+                    b.ToTable("Developer");
+                });
+
             modelBuilder.Entity("server.Models.Franchise", b =>
                 {
                     b.Property<long>("Id")
@@ -229,13 +268,83 @@ namespace server.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
 
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
                     b.HasKey("Id");
 
                     b.ToTable("Image");
+                });
+
+            modelBuilder.Entity("server.Models.News", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
+
+                    b.Property<string>("Content")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Header")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("News");
+                });
+
+            modelBuilder.Entity("server.Models.Publisher", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
+
+                    b.Property<string>("Country")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<long?>("ImageId")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Website")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateOnly>("YearFounded")
+                        .HasColumnType("date");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ImageId");
+
+                    b.ToTable("Publisher");
                 });
 
             modelBuilder.Entity("server.Models.Review", b =>
@@ -383,6 +492,9 @@ namespace server.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<long?>("ParentGameId")
+                        .HasColumnType("bigint");
+
                     b.Property<long>("Price")
                         .HasColumnType("bigint");
 
@@ -424,9 +536,42 @@ namespace server.Migrations
 
                     b.HasIndex("ImageId");
 
+                    b.HasIndex("ParentGameId");
+
                     b.HasIndex("StatusId");
 
                     b.ToTable("VideoGames");
+                });
+
+            modelBuilder.Entity("server.Models.VideoGameCollection", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"));
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("VideoGameCollection");
                 });
 
             modelBuilder.Entity("server.Models.VideoGameGenre", b =>
@@ -501,6 +646,24 @@ namespace server.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("server.Models.Developer", b =>
+                {
+                    b.HasOne("server.Models.Image", "Image")
+                        .WithMany()
+                        .HasForeignKey("ImageId");
+
+                    b.Navigation("Image");
+                });
+
+            modelBuilder.Entity("server.Models.Publisher", b =>
+                {
+                    b.HasOne("server.Models.Image", "Image")
+                        .WithMany()
+                        .HasForeignKey("ImageId");
+
+                    b.Navigation("Image");
+                });
+
             modelBuilder.Entity("server.Models.Review", b =>
                 {
                     b.HasOne("server.Models.User", "User")
@@ -526,9 +689,13 @@ namespace server.Migrations
                         .WithMany()
                         .HasForeignKey("FranchiseId");
 
-                    b.HasOne("server.Models.Status", "Image")
+                    b.HasOne("server.Models.Image", "Image")
                         .WithMany()
                         .HasForeignKey("ImageId");
+
+                    b.HasOne("server.Models.VideoGame", "ParentGame")
+                        .WithMany("DlCList")
+                        .HasForeignKey("ParentGameId");
 
                     b.HasOne("server.Models.Status", "Status")
                         .WithMany()
@@ -538,7 +705,18 @@ namespace server.Migrations
 
                     b.Navigation("Image");
 
+                    b.Navigation("ParentGame");
+
                     b.Navigation("Status");
+                });
+
+            modelBuilder.Entity("server.Models.VideoGameCollection", b =>
+                {
+                    b.HasOne("server.Models.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("server.Models.VideoGameGenre", b =>
@@ -567,6 +745,8 @@ namespace server.Migrations
 
             modelBuilder.Entity("server.Models.VideoGame", b =>
                 {
+                    b.Navigation("DlCList");
+
                     b.Navigation("Reviews");
 
                     b.Navigation("VideoGameGenres");

@@ -99,6 +99,7 @@ builder.Services.AddScoped<IStatusRepo, StatusRepository>();
 builder.Services.AddScoped<IImageRepo, ImageRepository>();
 builder.Services.AddScoped<IDeveloperRepo, DeveloperRepository>();
 builder.Services.AddScoped<IPublisherRepo, PublisherRepository>();
+builder.Services.AddScoped<IVideoGameCollectionRepo, VideoGameCollectionRepository>();
 builder.Services.AddScoped<IVideoGameGenreRepo, VideoGameGenreRepository>();
 builder.Services.AddScoped<INewsRepo, NewsRepository>();
 builder.Services.AddScoped<ITokenService, TokenService>();
