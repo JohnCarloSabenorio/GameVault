@@ -88,7 +88,7 @@ namespace server.Controllers
                 return NotFound("Video game collection does not exist.");
             }
 
-            return Ok(collection.ToVideoGameCollectionDTO());
+            return NoContent();
         }
 
     }

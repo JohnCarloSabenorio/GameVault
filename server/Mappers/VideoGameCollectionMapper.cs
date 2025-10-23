@@ -13,7 +13,6 @@ namespace server.Mappers
         {
             return new VideoGameCollectionDTO
             {
-                UserId = videoGameCollection.UserId,
                 Name = videoGameCollection.Name,
                 Description = videoGameCollection.Description,
                 CreatedAt = videoGameCollection.CreatedAt

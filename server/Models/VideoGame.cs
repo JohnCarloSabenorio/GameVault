@@ -24,10 +24,10 @@ public class VideoGame
     public DateTime ReleaseDate { get; set; }
     public DateTime CreatedAt { get; set; } = DateTime.Now;
     public DateTime UpdatedAt { get; set; } = DateTime.Now;
-    public Franchise Franchise { get; set; }
-    public Status Status { get; set; }
-    public Image Image { get; set; }
-    public VideoGame ParentGame { get; set; }
+    public Franchise? Franchise { get; set; }
+    public Status? Status { get; set; }
+    public Image? Image { get; set; }
+    public VideoGame? ParentGame { get; set; }
 
     public List<VideoGame> DlCList { get; set; } = new List<VideoGame>();
     public List<Review> Reviews { get; set; } = new List<Review>();

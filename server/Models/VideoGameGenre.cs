@@ -11,6 +11,6 @@ public class VideoGameGenre
     public long GenreId { get; set; }
     public DateTime CreatedAt { get; set; } = DateTime.Now;
     public DateTime UpdatedAt { get; set; } = DateTime.Now;
-    public VideoGame VideoGame { get; set; }
-    public Genre Genre { get; set; }
+    public VideoGame? VideoGame { get; set; }
+    public Genre? Genre { get; set; }
 }
