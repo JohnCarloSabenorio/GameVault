@@ -9,7 +9,7 @@ namespace server.Mappers
 {
     public static class VideoGameCollectionMapper
     {
-        public static VideoGameCollectionDTO ToVideoGameCollectionDTO(VideoGameCollection videoGameCollection)
+        public static VideoGameCollectionDTO ToVideoGameCollectionDTO(this VideoGameCollection videoGameCollection)
         {
             return new VideoGameCollectionDTO
             {
@@ -20,7 +20,7 @@ namespace server.Mappers
             };
         }
 
-        public static VideoGameCollection ToVideoGameCollectionFromCreateDTO(CreateVideoGameCollectionDTO createVideoGameCollectionDTO)
+        public static VideoGameCollection ToVideoGameCollectionFromCreateDTO(this CreateVideoGameCollectionDTO createVideoGameCollectionDTO)
         {
             return new VideoGameCollection { UserId = createVideoGameCollectionDTO.UserId, Name = createVideoGameCollectionDTO.Name, Description = createVideoGameCollectionDTO.Description };
         }
