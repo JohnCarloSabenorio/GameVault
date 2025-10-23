@@ -25,6 +25,7 @@ public class ApplicationDBContext : IdentityDbContext<User>
     public DbSet<Developer> Developer { get; set; }
     public DbSet<Publisher> Publisher { get; set; }
     public DbSet<VideoGameGenre> VideoGameGenre { get; set; }
+    public DbSet<VideoGameCollection> VideoGameCollection { get; set; }
     protected override void OnModelCreating(ModelBuilder builder)
     {
         base.OnModelCreating(builder);
