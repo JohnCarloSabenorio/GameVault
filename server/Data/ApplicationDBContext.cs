@@ -21,6 +21,7 @@ public class ApplicationDBContext : IdentityDbContext<User>
     public DbSet<Franchise> Franchise { get; set; }
     public DbSet<Status> Status { get; set; }
     public DbSet<Image> Image { get; set; }
+    public DbSet<News> News { get; set; }
     public DbSet<Developer> Developer { get; set; }
     public DbSet<Publisher> Publisher { get; set; }
     public DbSet<VideoGameGenre> VideoGameGenre { get; set; }
