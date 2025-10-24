@@ -27,6 +27,7 @@ public class ApplicationDBContext : IdentityDbContext<User>
     public DbSet<GamePlatform> GamePlatform { get; set; }
     public DbSet<GameGenre> GameGenre { get; set; }
     public DbSet<GameEngine> GameEngine { get; set; }
+    public DbSet<GameMode> GameMode { get; set; }
     public DbSet<GameCollection> GameCollection { get; set; }
     protected override void OnModelCreating(ModelBuilder builder)
     {
