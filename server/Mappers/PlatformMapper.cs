@@ -15,7 +15,7 @@ namespace server.Mappers
             return new PlatformDTO { Name = platform.Name, Generation = platform.Generation, Summary = platform.Summary, Url = platform.Url, Logo = platform.Logo?.ToImageDTO() };
         }
 
-        public static Platform ToPlatformFromCreateDTO(CreatePlatformDTO createPlatformDTO)
+        public static Platform ToPlatformFromCreateDTO(this CreatePlatformDTO createPlatformDTO)
         {
             return new Platform { Name = createPlatformDTO.Name, Generation = createPlatformDTO.Generation, Summary = createPlatformDTO.Summary, Url = createPlatformDTO.Url, LogoId = createPlatformDTO.LogoId };
         }
