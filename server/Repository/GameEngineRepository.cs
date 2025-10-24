@@ -46,7 +46,7 @@ namespace server.Repository
             return gameEngine;
         }
 
-        public Task<List<GameEngine>> GetAllAsync(GameEngineQueryObject gameEngineQueryObject)
+        public async Task<List<GameEngine>> GetAllAsync(GameEngineQueryObject gameEngineQueryObject)
         {
 
             var gameEngines = _context.GameEngine.AsQueryable();
@@ -60,7 +60,7 @@ namespace server.Repository
 
             var skipNumber = (gameEngineQueryObject.PageNumber - 1) * gameEngineQueryObject.PageSize;
 
-            return gameEngines.Skip(skipNumber).Take(gameEngineQueryObject.PageSize).Include(g => g.Logo).ToListAsync();
+            return await gameEngines.Skip(skipNumber).Take(gameEngineQueryObject.PageSize).Include(g => g.Logo).ToListAsync();
         }
 
         public async Task<GameEngine?> GetByIdAsync(long id)
@@ -77,7 +77,7 @@ namespace server.Repository
 
         public async Task<GameEngine?> UpdateAsync(long id, UpdateGameEngineDTO updateGameEngineDTO)
         {
-            var gameEngine = await _context.GameEngine.FindAsync(id);
+            var gameEngine = await _context.GameEngine.FirstOrDefaultAsync(g => g.Id == id);
 
             if (gameEngine == null)
             {
@@ -85,6 +85,7 @@ namespace server.Repository
             }
 
             _context.Entry(gameEngine).CurrentValues.SetValues(updateGameEngineDTO);
+            await _context.SaveChangesAsync();
 
             var updatedGameEngine = await _context.GameEngine.Include(g => g.Logo).FirstOrDefaultAsync(g => g.Id == id);
 

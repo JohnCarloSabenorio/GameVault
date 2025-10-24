@@ -22,7 +22,7 @@ namespace server.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<GameEngineDTO>>> GetAll(GameEngineQueryObject gameEngineQueryObject)
+        public async Task<ActionResult<IEnumerable<GameEngineDTO>>> GetAll([FromQuery] GameEngineQueryObject gameEngineQueryObject)
         {
             var gameEngines = await _gameEngineRepo.GetAllAsync(gameEngineQueryObject);
 
