@@ -27,6 +27,8 @@ namespace server.Repository
 
             await _context.GamePlatform.AddAsync(newGamePlatform);
             await _context.SaveChangesAsync();
+
+            await _context.Entry(newGamePlatform).Reference(p => p.Logo).LoadAsync();
             return newGamePlatform;
         }
 
@@ -61,12 +63,12 @@ namespace server.Repository
 
             var skipNumber = (gamePlatformQueryObject.PageNumber - 1) * gamePlatformQueryObject.PageSize;
 
-            return gamePlatforms.Skip(skipNumber).Take(gamePlatformQueryObject.PageSize).ToListAsync();
+            return gamePlatforms.Skip(skipNumber).Take(gamePlatformQueryObject.PageSize).Include(p => p.Logo).ToListAsync();
         }
 
         public async Task<GamePlatform?> GetByIdAsync(long id)
         {
-            var gamePlatform = await _context.GamePlatform.FindAsync(id);
+            var gamePlatform = await _context.GamePlatform.Include(p => p.Logo).FirstOrDefaultAsync(p => p.Id == id);
 
             if (gamePlatform == null) { return null; }
 
@@ -76,7 +78,7 @@ namespace server.Repository
 
         public async Task<GamePlatform?> UpdateAsync(long id, UpdateGamePlatformDTO updatePlatformDTO)
         {
-            var updatedGamePlatform = await _context.GamePlatform.FindAsync(id);
+            var updatedGamePlatform = await _context.GamePlatform.Include(p => p.Logo).FirstOrDefaultAsync(p => p.Id == id);
 
             if (updatedGamePlatform == null) { return null; }
 

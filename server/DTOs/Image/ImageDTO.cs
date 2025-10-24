@@ -7,8 +7,6 @@ namespace server.DTOs.Image
 {
     public class ImageDTO
     {
-        public long Id { get; set; }
-
         public string Name { get; set; } = String.Empty;
     }
 }

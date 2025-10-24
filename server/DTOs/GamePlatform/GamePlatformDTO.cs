@@ -12,6 +12,6 @@ public class GamePlatformDTO
     public long? Generation { get; set; }
     public string? Summary { get; set; }
     public string? Url { get; set; }
-    public ImageDTO? Logo { get; set; }
+    public string? LogoName { get; set; }
 
 }

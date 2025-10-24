@@ -12,7 +12,7 @@ namespace server.Mappers
     {
         public static GamePlatformDTO ToGamePlatformDTO(this GamePlatform gamePlatform)
         {
-            return new GamePlatformDTO { Name = gamePlatform.Name, Generation = gamePlatform.Generation, Summary = gamePlatform.Summary, Url = gamePlatform.Url, Logo = gamePlatform.Logo?.ToImageDTO() };
+            return new GamePlatformDTO { Name = gamePlatform.Name, Generation = gamePlatform.Generation, Summary = gamePlatform.Summary, Url = gamePlatform.Url, LogoName = gamePlatform.Logo?.Name };
         }
 
         public static GamePlatform ToGamePlatformFromCreateDTO(this CreateGamePlatformDTO createGamePlatformDTO)

@@ -23,7 +23,7 @@ namespace server.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<GamePlatformDTO>>> GetAll(GamePlatformQueryObject gamePlatformQueryObject)
+        public async Task<ActionResult<IEnumerable<GamePlatformDTO>>> GetAll([FromQuery] GamePlatformQueryObject gamePlatformQueryObject)
         {
             var platforms = await _gamePlatformRepo.GetAllAsync(gamePlatformQueryObject);
 
@@ -55,8 +55,9 @@ namespace server.Controllers
             }
             var newPlatform = await _gamePlatformRepo.CreateAsync(createGamePlatformDTO);
 
-            return CreatedAtAction(nameof(newPlatform), new { id = newPlatform.Id }, newPlatform.ToGamePlatformDTO());
+            return CreatedAtAction(nameof(GetById), new { id = newPlatform.Id }, newPlatform.ToGamePlatformDTO());
         }
+
         [HttpPut("{id:long}")]
         public async Task<ActionResult<GamePlatformDTO>> Update([FromRoute] long id, UpdateGamePlatformDTO updateGamePlatformDTO)
         {
@@ -65,13 +66,12 @@ namespace server.Controllers
                 return BadRequest(ModelState);
             }
             var updatedPlatform = await _gamePlatformRepo.UpdateAsync(id, updateGamePlatformDTO);
-
             if (updatedPlatform == null)
             {
                 return NotFound("Game platform does not exist.");
             }
 
-            return Ok(updatedPlatform);
+            return Ok(updatedPlatform.ToGamePlatformDTO());
         }
 
         [HttpDelete("{id:long}")]
