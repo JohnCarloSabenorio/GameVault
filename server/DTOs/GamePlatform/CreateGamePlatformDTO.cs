@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace server.DTOs.Platform
 {
-    public class CreatePlatformDTO
+    public class CreateGamePlatformDTO
     {
         [Required]
         [MinLength(1, ErrorMessage = ("Platform name length must be atleast 1 character long."))]

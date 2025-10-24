@@ -13,7 +13,7 @@ public class Review
     public string? Content { get; set; }
     public DateTime CreatedAt { get; set; } = DateTime.Now;
     public DateTime UpdatedAt { get; set; } = DateTime.Now;
-    public VideoGame? VideoGame { get; set; }
+    public Game? VideoGame { get; set; }
     public User? User { get; set; }
 
 }

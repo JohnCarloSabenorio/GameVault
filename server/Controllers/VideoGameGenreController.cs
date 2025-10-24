@@ -8,10 +8,10 @@ namespace server.Models;
 [ApiController]
 public class VideoGameGenreController : ControllerBase
 {
-    private readonly IVideoGameRepo _videoGameRepo;
+    private readonly IGameRepo _videoGameRepo;
     private readonly IGenreRepo _genreRepo;
     private readonly IVideoGameGenreRepo _videoGameGenreRepo;
-    public VideoGameGenreController(IVideoGameRepo videoGameRepo, IGenreRepo genreRepo, IVideoGameGenreRepo videoGameGenreRepo)
+    public VideoGameGenreController(IGameRepo videoGameRepo, IGenreRepo genreRepo, IVideoGameGenreRepo videoGameGenreRepo)
     {
         _videoGameRepo = videoGameRepo;
         _genreRepo = genreRepo;

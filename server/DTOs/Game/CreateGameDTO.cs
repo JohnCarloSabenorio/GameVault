@@ -1,10 +1,10 @@
 using System.ComponentModel.DataAnnotations;
+
 namespace server.DTOs.VideoGame;
 
 
-public class UpdateVideoGameDTO
+public class CreateGameDTO
 {
-
     [Required]
     [MinLength(1, ErrorMessage = "Video game name must be atleast 1 character long.")]
     [MaxLength(366, ErrorMessage = "Video game name cannot exceed 366 characters.")]
@@ -20,6 +20,6 @@ public class UpdateVideoGameDTO
     public long? FranchiseId { get; set; }
     public long? ImageId { get; set; }
     public long? StatusId { get; set; }
-    public DateTime? ReleaseDate { get; set; }
-    public DateTime? UpdatedAt { get; set; } = DateTime.Now;
+    public DateTime ReleaseDate { get; set; }
+
 }

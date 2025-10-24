@@ -92,7 +92,7 @@ builder.Services.AddAuthentication(options =>
 });
 
 builder.Services.AddScoped<IReviewRepo, ReviewRepository>();
-builder.Services.AddScoped<IVideoGameRepo, VideoGameRepository>();
+builder.Services.AddScoped<IGameRepo, GameRepository>();
 builder.Services.AddScoped<IGenreRepo, GenreRepository>();
 builder.Services.AddScoped<IFranchiseRepo, FranchiseRepository>();
 builder.Services.AddScoped<IStatusRepo, StatusRepository>();

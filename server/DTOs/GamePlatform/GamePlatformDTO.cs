@@ -6,7 +6,7 @@ using server.DTOs.Image;
 using server.Models;
 namespace server.DTOs.Platform;
 
-public class PlatformDTO
+public class GamePlatformDTO
 {
     public string? Name { get; set; }
     public long? Generation { get; set; }

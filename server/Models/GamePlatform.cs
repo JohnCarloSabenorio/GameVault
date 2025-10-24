@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace server.Models
 {
-    public class Platform
+    public class GamePlatform
     {
         public long Id { get; set; }
         public string? Name { get; set; }

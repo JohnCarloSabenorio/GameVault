@@ -10,41 +10,41 @@ using server.Models;
 namespace server.Repository;
 
 
-public class VideoGameRepository : IVideoGameRepo
+public class GameRepository : IGameRepo
 {
 
     private readonly ApplicationDBContext _context;
-    public VideoGameRepository(ApplicationDBContext context)
+    public GameRepository(ApplicationDBContext context)
     {
         _context = context;
     }
-    public async Task<VideoGame> CreateAsync(CreateVideoGameDTO createVideoGameDTO)
+    public async Task<Game> CreateAsync(CreateGameDTO createGameDTO)
     {
         // Convert the createDTO to videoGameModel
-        var videoGameData = createVideoGameDTO.toVideoGameFromCreateDTO();
+        var videoGameData = createGameDTO.toVideoGameFromCreateDTO();
 
-        await _context.VideoGame.AddAsync(videoGameData);
+        await _context.Game.AddAsync(videoGameData);
         await _context.SaveChangesAsync();
 
         return videoGameData;
     }
 
-    public async Task<VideoGame?> DeleteAsync(long id)
+    public async Task<Game?> DeleteAsync(long id)
     {
-        var videoGame = await _context.VideoGame.FindAsync(id);
+        var videoGame = await _context.Game.FindAsync(id);
         if (videoGame == null)
         {
             return null;
         }
-        _context.VideoGame.Remove(videoGame);
+        _context.Game.Remove(videoGame);
         await _context.SaveChangesAsync();
 
         return videoGame;
     }
 
-    public async Task<List<VideoGame>> GetAllAsync(VideoGameQueryObject queryObject)
+    public async Task<List<Game>> GetAllAsync(GameQueryObject queryObject)
     {
-        var videoGames = _context.VideoGame.AsQueryable();
+        var videoGames = _context.Game.AsQueryable();
 
 
         if (!string.IsNullOrEmpty(queryObject.Name))
@@ -67,21 +67,21 @@ public class VideoGameRepository : IVideoGameRepo
         return await videoGames.Skip(skipNumber).Take(queryObject.PageSize).Include(v => v.Reviews).ThenInclude(r => r.User).ToListAsync();
     }
 
-    public async Task<VideoGame?> GetByIdAsync(long id)
+    public async Task<Game?> GetByIdAsync(long id)
     {
-        return await _context.VideoGame.Include(v => v.Reviews).ThenInclude(r => r.User).FirstOrDefaultAsync(v => v.Id == id);
+        return await _context.Game.Include(v => v.Reviews).ThenInclude(r => r.User).FirstOrDefaultAsync(v => v.Id == id);
     }
 
-    public async Task<VideoGame?> UpdateAsync(long id, UpdateVideoGameDTO updateVideoGameDTO)
+    public async Task<Game?> UpdateAsync(long id, UpdateGameDTO updateGameDTO)
     {
-        var videoGame = await _context.VideoGame.FindAsync(id);
+        var videoGame = await _context.Game.FindAsync(id);
 
         if (videoGame == null)
         {
             return null;
         }
 
-        _context.Entry(videoGame).CurrentValues.SetValues(updateVideoGameDTO);
+        _context.Entry(videoGame).CurrentValues.SetValues(updateGameDTO);
 
         await _context.SaveChangesAsync();
 
@@ -90,6 +90,6 @@ public class VideoGameRepository : IVideoGameRepo
 
     public async Task<bool> VideoGameExists(long id)
     {
-        return await _context.VideoGame.AnyAsync(v => v.Id == id);
+        return await _context.Game.AnyAsync(v => v.Id == id);
     }
 }

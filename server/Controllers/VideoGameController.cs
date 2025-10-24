@@ -13,10 +13,10 @@ namespace server.Controllers;
 [ApiController]
 public class VideoGameController : ControllerBase
 {
-    public readonly IVideoGameRepo _videoGameRepo;
+    public readonly IGameRepo _videoGameRepo;
 
 
-    public VideoGameController(IVideoGameRepo videoGameRepo)
+    public VideoGameController(IGameRepo videoGameRepo)
     {
         _videoGameRepo = videoGameRepo;
     }
@@ -24,7 +24,7 @@ public class VideoGameController : ControllerBase
     // Create get all function
     [HttpGet]
 
-    public async Task<ActionResult<IEnumerable<VideoGameDTO>>> GetAll([FromQuery] VideoGameQueryObject queryObject)
+    public async Task<ActionResult<IEnumerable<GameDTO>>> GetAll([FromQuery] GameQueryObject queryObject)
     {
         // Get all video games
         var videoGames = await _videoGameRepo.GetAllAsync(queryObject);
@@ -38,7 +38,7 @@ public class VideoGameController : ControllerBase
     // Create get function
 
     [HttpGet("{id:long}")]
-    public async Task<ActionResult<VideoGameDTO>> GetById([FromRoute] long id)
+    public async Task<ActionResult<GameDTO>> GetById([FromRoute] long id)
     {
         // Get video game
         var videoGame = await _videoGameRepo.GetByIdAsync(id);
@@ -56,7 +56,7 @@ public class VideoGameController : ControllerBase
 
     [HttpPost]
 
-    public async Task<ActionResult<VideoGameDTO>> Create(CreateVideoGameDTO createVideoGameDTO)
+    public async Task<ActionResult<GameDTO>> Create(CreateGameDTO createVideoGameDTO)
     {
         // Check if the model is valid
         if (!ModelState.IsValid)
@@ -73,7 +73,7 @@ public class VideoGameController : ControllerBase
 
     // Create put function
     [HttpPut("{id:long}")]
-    public async Task<ActionResult<VideoGameDTO>> Update([FromRoute] long id, UpdateVideoGameDTO updateVideoGameDTO)
+    public async Task<ActionResult<GameDTO>> Update([FromRoute] long id, UpdateGameDTO updateVideoGameDTO)
     {
         // Check if the model is valid
         if (!ModelState.IsValid)

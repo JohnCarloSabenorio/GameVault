@@ -1,7 +1,7 @@
 
 
 
-public class VideoGameQueryObject
+public class GameQueryObject
 {
     public string? Name { get; set; } = null;
     public string? SortBy { get; set; } = null;

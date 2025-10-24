@@ -16,7 +16,7 @@ public class ApplicationDBContext : IdentityDbContext<User>
     }
 
     public DbSet<Review> Review { get; set; }
-    public DbSet<VideoGame> VideoGame { get; set; }
+    public DbSet<Game> Game { get; set; }
     public DbSet<Genre> Genre { get; set; }
     public DbSet<Franchise> Franchise { get; set; }
     public DbSet<Status> Status { get; set; }
@@ -24,7 +24,7 @@ public class ApplicationDBContext : IdentityDbContext<User>
     public DbSet<News> News { get; set; }
     public DbSet<Developer> Developer { get; set; }
     public DbSet<Publisher> Publisher { get; set; }
-    public DbSet<Platform> Platform { get; set; }
+    public DbSet<GamePlatform> GamePlatform { get; set; }
     public DbSet<VideoGameGenre> VideoGameGenre { get; set; }
     public DbSet<VideoGameCollection> VideoGameCollection { get; set; }
     protected override void OnModelCreating(ModelBuilder builder)

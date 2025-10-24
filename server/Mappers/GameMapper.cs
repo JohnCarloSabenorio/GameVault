@@ -7,9 +7,9 @@ namespace server.Mappers;
 
 public static class VideoGameMapper
 {
-    public static VideoGameDTO ToVideoGameDTO(this VideoGame videoGame)
+    public static GameDTO ToVideoGameDTO(this Game videoGame)
     {
-        return new VideoGameDTO
+        return new GameDTO
         {
             Id = videoGame.Id,
             Name = videoGame.Name,
@@ -31,9 +31,9 @@ public static class VideoGameMapper
         };
     }
 
-    public static VideoGame toVideoGameFromCreateDTO(this CreateVideoGameDTO createVideoGameDTO)
+    public static Game toVideoGameFromCreateDTO(this CreateGameDTO createVideoGameDTO)
     {
-        return new VideoGame
+        return new Game
         {
             Name = createVideoGameDTO.Name,
             Storyline = createVideoGameDTO.Storyline,
