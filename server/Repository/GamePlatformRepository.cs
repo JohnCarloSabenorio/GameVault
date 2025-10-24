@@ -64,7 +64,7 @@ namespace server.Repository
             return gamePlatforms.Skip(skipNumber).Take(gamePlatformQueryObject.PageSize).ToListAsync();
         }
 
-        public async Task<GamePlatform?> GetById(long id)
+        public async Task<GamePlatform?> GetByIdAsync(long id)
         {
             var gamePlatform = await _context.GamePlatform.FindAsync(id);
 
