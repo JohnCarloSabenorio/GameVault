@@ -16,7 +16,7 @@ namespace server.Models
         public string? Description { get; set; }
         public long? ImageId { get; set; }
 
-        public Image Image { get; set; }
+        public Image? Image { get; set; }
         public DateTime CreatedAt { get; set; } = DateTime.Now;
         public DateTime UpdatedAt { get; set; } = DateTime.Now;
     }

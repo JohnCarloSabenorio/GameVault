@@ -15,12 +15,13 @@ public class TokenService : ITokenService
     public TokenService(IConfiguration config)
     {
         _config = config;
-        _key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["JWT:SigningKey"]));
+        _key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["JWT:SigningKey"] ?? string.Empty));
     }
     public string CreateToken(User user)
     {
-        var claims = new List<Claim> { new Claim(JwtRegisteredClaimNames.Email, user.Email),
-        new Claim(JwtRegisteredClaimNames.GivenName, user.UserName) };
+
+        var claims = new List<Claim> { new Claim(JwtRegisteredClaimNames.Email, user.Email ?? string.Empty),
+        new Claim(JwtRegisteredClaimNames.GivenName, user.UserName ?? string.Empty) };
 
         var creds = new SigningCredentials(_key, SecurityAlgorithms.HmacSha512Signature);
 
