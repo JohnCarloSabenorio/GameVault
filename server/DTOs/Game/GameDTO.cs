@@ -1,7 +1,7 @@
 
 using server.DTOs.Review;
 using server.Models;
-namespace server.DTOs.VideoGame;
+namespace server.DTOs.Game;
 
 
 public class GameDTO

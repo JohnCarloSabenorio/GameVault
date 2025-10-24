@@ -25,18 +25,18 @@ public class ApplicationDBContext : IdentityDbContext<User>
     public DbSet<Developer> Developer { get; set; }
     public DbSet<Publisher> Publisher { get; set; }
     public DbSet<GamePlatform> GamePlatform { get; set; }
-    public DbSet<VideoGameGenre> VideoGameGenre { get; set; }
-    public DbSet<VideoGameCollection> VideoGameCollection { get; set; }
+    public DbSet<GameGenre> GameGenre { get; set; }
+    public DbSet<GameCollection> GameCollection { get; set; }
     protected override void OnModelCreating(ModelBuilder builder)
     {
         base.OnModelCreating(builder);
 
         // Composite keys
-        builder.Entity<VideoGameGenre>(x => x.HasKey(p => new { p.GenreId, p.VideoGameId }));
+        builder.Entity<GameGenre>(x => x.HasKey(p => new { p.GenreId, p.GameId }));
 
-        // video game & genre many-to-many relationship
-        builder.Entity<VideoGameGenre>().HasOne(x => x.VideoGame).WithMany(x => x.VideoGameGenres).HasForeignKey(p => p.VideoGameId);
-        builder.Entity<VideoGameGenre>().HasOne(x => x.Genre).WithMany(x => x.VideoGameGenres).HasForeignKey(p => p.GenreId);
+        // game & genre many-to-many relationship
+        builder.Entity<GameGenre>().HasOne(x => x.Game).WithMany(x => x.GameGenre).HasForeignKey(p => p.GameId);
+        builder.Entity<GameGenre>().HasOne(x => x.Genre).WithMany(x => x.GameGenre).HasForeignKey(p => p.GenreId);
 
         List<IdentityRole> roles = new List<IdentityRole>
         {

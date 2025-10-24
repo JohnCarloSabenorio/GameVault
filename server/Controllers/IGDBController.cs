@@ -20,10 +20,10 @@ namespace server.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<string?>> GetVideoGamesFromIGDB()
+        public async Task<ActionResult<string?>> GetGamesFromIGDB()
         {
 
-            var content = await _igdbService.GetVideoGamesAsync();
+            var content = await _igdbService.GetGamesAsync();
 
             return Ok(content);
         }

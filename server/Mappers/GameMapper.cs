@@ -1,53 +1,53 @@
 using Microsoft.AspNetCore.StaticAssets;
-using server.DTOs.VideoGame;
+using server.DTOs.Game;
 using server.Models;
 
 namespace server.Mappers;
 
 
-public static class VideoGameMapper
+public static class GameMapper
 {
-    public static GameDTO ToVideoGameDTO(this Game videoGame)
+    public static GameDTO ToGameDTO(this Game game)
     {
         return new GameDTO
         {
-            Id = videoGame.Id,
-            Name = videoGame.Name,
-            Storyline = videoGame.Storyline,
-            Summary = videoGame.Summary,
-            Rating = videoGame.Rating,
-            RatingCount = videoGame.RatingCount,
-            TotalFavorited = videoGame.TotalFavorited,
-            TotalPlayers = videoGame.TotalPlayers,
-            TotalUnitSold = videoGame.TotalUnitSold,
-            Price = videoGame.Price,
-            FranchiseId = videoGame.FranchiseId,
-            ImageId = videoGame.ImageId,
-            StatusId = videoGame.StatusId,
-            ReleaseDate = videoGame.ReleaseDate,
-            CreatedAt = videoGame.CreatedAt,
-            UpdatedAt = videoGame.UpdatedAt,
-            Reviews = videoGame.Reviews.Select(r => r.ToReviewDTO()).ToList()
+            Id = game.Id,
+            Name = game.Name,
+            Storyline = game.Storyline,
+            Summary = game.Summary,
+            Rating = game.Rating,
+            RatingCount = game.RatingCount,
+            TotalFavorited = game.TotalFavorited,
+            TotalPlayers = game.TotalPlayers,
+            TotalUnitSold = game.TotalUnitSold,
+            Price = game.Price,
+            FranchiseId = game.FranchiseId,
+            ImageId = game.ImageId,
+            StatusId = game.StatusId,
+            ReleaseDate = game.ReleaseDate,
+            CreatedAt = game.CreatedAt,
+            UpdatedAt = game.UpdatedAt,
+            Reviews = game.Reviews.Select(r => r.ToReviewDTO()).ToList()
         };
     }
 
-    public static Game toVideoGameFromCreateDTO(this CreateGameDTO createVideoGameDTO)
+    public static Game ToGameFromCreateDTO(this CreateGameDTO createGameDTO)
     {
         return new Game
         {
-            Name = createVideoGameDTO.Name,
-            Storyline = createVideoGameDTO.Storyline,
-            Summary = createVideoGameDTO.Summary,
-            Rating = createVideoGameDTO.Rating,
-            RatingCount = createVideoGameDTO.RatingCount,
-            TotalFavorited = createVideoGameDTO.TotalFavorited,
-            TotalPlayers = createVideoGameDTO.TotalPlayers,
-            TotalUnitSold = createVideoGameDTO.TotalUnitSold,
-            Price = createVideoGameDTO.Price,
-            FranchiseId = createVideoGameDTO.FranchiseId,
-            StatusId = createVideoGameDTO.StatusId,
-            ImageId = createVideoGameDTO.ImageId,
-            ReleaseDate = createVideoGameDTO.ReleaseDate,
+            Name = createGameDTO.Name,
+            Storyline = createGameDTO.Storyline,
+            Summary = createGameDTO.Summary,
+            Rating = createGameDTO.Rating,
+            RatingCount = createGameDTO.RatingCount,
+            TotalFavorited = createGameDTO.TotalFavorited,
+            TotalPlayers = createGameDTO.TotalPlayers,
+            TotalUnitSold = createGameDTO.TotalUnitSold,
+            Price = createGameDTO.Price,
+            FranchiseId = createGameDTO.FranchiseId,
+            StatusId = createGameDTO.StatusId,
+            ImageId = createGameDTO.ImageId,
+            ReleaseDate = createGameDTO.ReleaseDate,
         };
     }
 }

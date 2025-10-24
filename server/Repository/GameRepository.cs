@@ -2,7 +2,7 @@
 
 using Microsoft.EntityFrameworkCore;
 using server.Data;
-using server.DTOs.VideoGame;
+using server.DTOs.Game;
 using server.Interfaces;
 using server.Mappers;
 using server.Models;
@@ -20,43 +20,43 @@ public class GameRepository : IGameRepo
     }
     public async Task<Game> CreateAsync(CreateGameDTO createGameDTO)
     {
-        // Convert the createDTO to videoGameModel
-        var videoGameData = createGameDTO.toVideoGameFromCreateDTO();
+        // Convert the createDTO to GameModel
+        var gameData = createGameDTO.ToGameFromCreateDTO();
 
-        await _context.Game.AddAsync(videoGameData);
+        await _context.Game.AddAsync(gameData);
         await _context.SaveChangesAsync();
 
-        return videoGameData;
+        return gameData;
     }
 
     public async Task<Game?> DeleteAsync(long id)
     {
-        var videoGame = await _context.Game.FindAsync(id);
-        if (videoGame == null)
+        var game = await _context.Game.FindAsync(id);
+        if (game == null)
         {
             return null;
         }
-        _context.Game.Remove(videoGame);
+        _context.Game.Remove(game);
         await _context.SaveChangesAsync();
 
-        return videoGame;
+        return game;
     }
 
     public async Task<List<Game>> GetAllAsync(GameQueryObject queryObject)
     {
-        var videoGames = _context.Game.AsQueryable();
+        var games = _context.Game.AsQueryable();
 
 
         if (!string.IsNullOrEmpty(queryObject.Name))
         {
-            videoGames = videoGames.Where(u => u.Name != null && u.Name.Contains(queryObject.Name));
+            games = games.Where(u => u.Name != null && u.Name.Contains(queryObject.Name));
         }
 
         if (!string.IsNullOrEmpty(queryObject.SortBy))
         {
             if (queryObject.SortBy.Equals("Name", StringComparison.OrdinalIgnoreCase))
             {
-                videoGames = queryObject.IsDescending ? videoGames.OrderByDescending(v => v.Name) : videoGames.OrderBy(v => v.Name);
+                games = queryObject.IsDescending ? games.OrderByDescending(v => v.Name) : games.OrderBy(v => v.Name);
             }
         }
 
@@ -64,7 +64,7 @@ public class GameRepository : IGameRepo
 
 
 
-        return await videoGames.Skip(skipNumber).Take(queryObject.PageSize).Include(v => v.Reviews).ThenInclude(r => r.User).ToListAsync();
+        return await games.Skip(skipNumber).Take(queryObject.PageSize).Include(v => v.Reviews).ThenInclude(r => r.User).ToListAsync();
     }
 
     public async Task<Game?> GetByIdAsync(long id)
@@ -74,21 +74,21 @@ public class GameRepository : IGameRepo
 
     public async Task<Game?> UpdateAsync(long id, UpdateGameDTO updateGameDTO)
     {
-        var videoGame = await _context.Game.FindAsync(id);
+        var game = await _context.Game.FindAsync(id);
 
-        if (videoGame == null)
+        if (game == null)
         {
             return null;
         }
 
-        _context.Entry(videoGame).CurrentValues.SetValues(updateGameDTO);
+        _context.Entry(game).CurrentValues.SetValues(updateGameDTO);
 
         await _context.SaveChangesAsync();
 
-        return videoGame;
+        return game;
     }
 
-    public async Task<bool> VideoGameExists(long id)
+    public async Task<bool> GameExists(long id)
     {
         return await _context.Game.AnyAsync(v => v.Id == id);
     }

@@ -30,5 +30,5 @@ public class Game
 
     public List<Game> DlCList { get; set; } = new List<Game>();
     public List<Review> Reviews { get; set; } = new List<Review>();
-    public List<VideoGameGenre> VideoGameGenres { get; set; } = new List<VideoGameGenre>();
+    public List<GameGenre> GameGenre { get; set; } = new List<GameGenre>();
 }

@@ -5,6 +5,6 @@ namespace server.Interfaces;
 
 public interface IIGDBService
 {
-    Task<string?> GetVideoGamesAsync();
+    Task<string?> GetGamesAsync();
 
 }

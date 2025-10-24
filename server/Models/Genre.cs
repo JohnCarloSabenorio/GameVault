@@ -12,6 +12,6 @@ public class Genre
 
     public DateTime CreatedAt { get; set; } = DateTime.Now;
     public DateTime UpdatedAt { get; set; } = DateTime.Now;
-    public List<VideoGameGenre> VideoGameGenres { get; set; } = new List<VideoGameGenre>();
+    public List<GameGenre> GameGenre { get; set; } = new List<GameGenre>();
 
 }

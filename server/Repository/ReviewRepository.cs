@@ -21,9 +21,9 @@ public class ReviewRepository : IReviewRepo
 
 
 
-    public async Task<Review> CreateAsync(long videoGameId, string userId, CreateReviewDTO createReviewDTO)
+    public async Task<Review> CreateAsync(long gameId, string userId, CreateReviewDTO createReviewDTO)
     {
-        var reviewData = createReviewDTO.ToReviewFromCreateDTO(videoGameId, userId);
+        var reviewData = createReviewDTO.ToReviewFromCreateDTO(gameId, userId);
 
         await _context.Review.AddAsync(reviewData);
         await _context.SaveChangesAsync();
