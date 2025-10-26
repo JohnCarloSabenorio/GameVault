@@ -29,6 +29,7 @@ public class ApplicationDBContext : IdentityDbContext<User>
     public DbSet<GameEngine> GameEngine { get; set; }
     public DbSet<GameMode> GameMode { get; set; }
     public DbSet<GameCollection> GameCollection { get; set; }
+    public DbSet<Tag> Tag { get; set; }
     protected override void OnModelCreating(ModelBuilder builder)
     {
         base.OnModelCreating(builder);
