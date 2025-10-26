@@ -53,7 +53,7 @@ namespace server.Controllers
 
             var newVideo = await _videoRepo.CreateAsync(createVideoDTO);
 
-            return Ok(newVideo.ToVideoDTO());
+            return CreatedAtAction(nameof(GetById), new { id = newVideo.Id }, newVideo.ToVideoDTO());
         }
 
         [HttpPut("{id:long}")]

@@ -52,8 +52,7 @@ namespace server.Controllers
             }
 
             var newGameMode = await _gameModeRepo.CreateAsync(createGameModeDTO);
-
-            return Ok(newGameMode.ToGameModeDTO());
+            return CreatedAtAction(nameof(GetById), new { id = newGameMode.Id }, newGameMode.ToGameModeDTO());
         }
 
         [HttpPut("{id:long}")]

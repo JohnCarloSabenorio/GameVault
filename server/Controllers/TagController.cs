@@ -53,8 +53,7 @@ namespace server.Controllers
             }
 
             var newTag = await _tagRepo.CreateAysnc(createTagDTO);
-
-            return Ok(newTag.ToTagDTO());
+            return CreatedAtAction(nameof(GetById), new { id = newTag.Id }, newTag.ToTagDTO());
         }
 
         [HttpPut("{id:long}")]
