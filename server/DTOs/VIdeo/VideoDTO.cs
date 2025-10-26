@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace server.Models
+namespace server.DTOs.VIdeo
 {
-    public class Video
+    public class VideoDTO
     {
-        public long Id { get; set; }
         public string? Name { get; set; }
+
     }
 }
