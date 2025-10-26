@@ -11,7 +11,7 @@ using server.Models;
 
 namespace server.Controllers
 {
-    [Route("{id:long}")]
+    [Route("api/video")]
     [ApiController]
     public class VideoController : ControllerBase
     {

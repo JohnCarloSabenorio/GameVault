@@ -40,6 +40,8 @@ namespace server.Repository
                 return null;
             }
 
+            _context.Video.Remove(deletedVideo);
+            await _context.SaveChangesAsync();
             return deletedVideo;
         }
 
