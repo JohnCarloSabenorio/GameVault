@@ -102,6 +102,7 @@ builder.Services.AddScoped<IPublisherRepo, PublisherRepository>();
 builder.Services.AddScoped<IGameCollectionRepo, GameCollectionRepository>();
 builder.Services.AddScoped<IGamePlatformRepo, GamePlatformRepository>();
 builder.Services.AddScoped<IGameGenreRepo, GameGenreRepository>();
+builder.Services.AddScoped<IGameModeRepo, GameModeRepository>();
 builder.Services.AddScoped<IGameEngineRepo, GameEngineRepository>();
 builder.Services.AddScoped<INewsRepo, NewsRepository>();
 builder.Services.AddScoped<ITokenService, TokenService>();
