@@ -10,6 +10,7 @@ using server.Mappers;
 
 namespace server.Controllers
 {
+    [Route("api/game-mode")]
     [ApiController]
     public class GameModeController : ControllerBase
     {
