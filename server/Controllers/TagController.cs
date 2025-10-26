@@ -75,6 +75,8 @@ namespace server.Controllers
             return Ok(updatedTag.ToTagDTO());
 
         }
+
+        [HttpDelete("{id:long}")]
         public async Task<IActionResult> Delete(long id)
         {
             var deletedTag = await _tagRepo.DeleteAsync(id);
