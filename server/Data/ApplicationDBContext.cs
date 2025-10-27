@@ -38,10 +38,16 @@ public class ApplicationDBContext : IdentityDbContext<User>
 
         // Composite keys
         builder.Entity<GameGenre>(x => x.HasKey(p => new { p.GenreId, p.GameId }));
+        builder.Entity<GameDeveloper>(x => x.HasKey(p => new { p.GameId, p.DeveloperId }));
 
-        // game & genre many-to-many relationship
+
+        // Many-to-many Relationship
         builder.Entity<GameGenre>().HasOne(x => x.Game).WithMany(x => x.GameGenre).HasForeignKey(p => p.GameId);
         builder.Entity<GameGenre>().HasOne(x => x.Genre).WithMany(x => x.GameGenre).HasForeignKey(p => p.GenreId);
+
+        builder.Entity<GameDeveloper>().HasOne(x => x.Game).WithMany(x => x.GameDeveloper).HasForeignKey(p => p.GameId);
+        builder.Entity<GameDeveloper>().HasOne(x => x.Developer).WithMany(x => x.GameDeveloper).HasForeignKey(p => p.DeveloperId);
+
 
         List<IdentityRole> roles = new List<IdentityRole>
         {

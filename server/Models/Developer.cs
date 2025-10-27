@@ -18,5 +18,7 @@ namespace server.Models
         public Image? Image { get; set; }
         public DateTime CreatedAt { get; set; } = DateTime.Now;
         public DateTime UpdatedAt { get; set; } = DateTime.Now;
+        public List<GameDeveloper> GameDeveloper { get; set; } = new List<GameDeveloper>();
+
     }
 }
