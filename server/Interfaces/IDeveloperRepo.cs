@@ -15,5 +15,7 @@ namespace server.Interfaces
         Task<Developer> CreateAsync(CreateDeveloperDTO createDeveloperDTO);
         Task<Developer?> UpdateAsync(long id, UpdateDeveloperDTO updateDeveloperDTO);
         Task<Developer?> DeleteAsync(long id);
+
+        Task<bool> DeveloperExists(long id);
     }
 }

@@ -28,7 +28,7 @@ public class GameGenreController : ControllerBase
     }
 
     [HttpPost("{gameId:long}")]
-    public async Task<ActionResult<GameGenre>> CreateGameGenre([FromRoute] long gameId, long genreId)
+    public async Task<ActionResult<GameGenreDTO>> CreateGameGenre([FromRoute] long gameId, long genreId)
     {
         // Check if game exists
         if (!await _gameRepo.GameExists(gameId))

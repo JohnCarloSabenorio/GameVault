@@ -45,6 +45,11 @@ namespace server.Repository
             return deletedDeveloper;
         }
 
+        public async Task<bool> DeveloperExists(long id)
+        {
+            return await _context.Developer.AnyAsync(d => d.Id == id);
+        }
+
         public async Task<Developer?> GetByIdAsync(long id)
         {
             var developer = await _context.Developer.FirstOrDefaultAsync(d => d.Id == id);
