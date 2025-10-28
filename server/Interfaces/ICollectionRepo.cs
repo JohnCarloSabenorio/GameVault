@@ -15,5 +15,6 @@ namespace server.Interfaces
         Task<Collection> CreateAsync(CreateCollectionDTO createCollectionDTO);
         Task<Collection?> DeleteAsync(long id);
         Task<Collection?> UpdateAsync(long id, UpdateCollectionDTO updateCollectionDTO);
+        Task<bool> CollectionExists(long collectionId);
     }
 }

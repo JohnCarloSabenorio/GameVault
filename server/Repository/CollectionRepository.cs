@@ -21,6 +21,12 @@ namespace server.Repository
         {
             _context = context;
         }
+
+        public async Task<bool> CollectionExists(long collectionId)
+        {
+            return await _context.Collection.AnyAsync(c => c.Id == collectionId);
+        }
+
         public async Task<Collection> CreateAsync(CreateCollectionDTO createCollectionDTO)
         {
             var collectionData = createCollectionDTO.ToCollectionFromCreateDTO();
@@ -90,5 +96,7 @@ namespace server.Repository
 
             return collection;
         }
+
+
     }
 }
