@@ -55,8 +55,8 @@ public class ApplicationDBContext : IdentityDbContext<User>
         builder.Entity<GamePublisher>().HasOne(x => x.Game).WithMany(x => x.GamePublisher).HasForeignKey(p => p.GameId);
         builder.Entity<GamePublisher>().HasOne(x => x.Publisher).WithMany(x => x.GamePublisher).HasForeignKey(p => p.PublisherId);
 
-        builder.Entity<GameCollection>().HasOne(x => x.Game).WithMany(x => GameCollection).HasForeignKey(p => p.GameId);
-        builder.Entity<GameCollection>().HasOne(x => x.Collection).WithMany(x => GameCollection).HasForeignKey(p => p.CollectionId);
+        builder.Entity<GameCollection>().HasOne(x => x.Game).WithMany(x => x.GameCollection).HasForeignKey(p => p.GameId);
+        builder.Entity<GameCollection>().HasOne(x => x.Collection).WithMany(x => x.GameCollection).HasForeignKey(p => p.CollectionId);
 
         List<IdentityRole> roles = new List<IdentityRole>
         {
