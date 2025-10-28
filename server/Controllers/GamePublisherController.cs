@@ -40,7 +40,7 @@ namespace server.Controllers
 
             if (deletedPublisher == null)
             {
-                return NotFound();
+                return NotFound("Game publisher does not exist.");
             }
 
             return NoContent();
