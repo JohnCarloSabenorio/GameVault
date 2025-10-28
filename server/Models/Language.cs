@@ -11,5 +11,7 @@ namespace server.Models
         public string? Locale { get; set; }
         public string? Name { get; set; }
         public string? NativeName { get; set; }
+        public List<GameLanguage> GameLanguage { get; set; } = new List<GameLanguage>();
+
     }
 }
