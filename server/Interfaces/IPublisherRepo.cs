@@ -15,5 +15,6 @@ namespace server.Interfaces
         Task<Publisher> CreateAsync(CreatePublisherDTO createPublisherDTO);
         Task<Publisher?> UpdateAsync(long id, UpdatePublisherDTO updatePublisherDTO);
         Task<Publisher?> DeleteAsync(long id);
+        Task<bool> PublisherExists(long id);
     }
 }

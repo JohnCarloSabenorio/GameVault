@@ -84,6 +84,11 @@ namespace server.Repository
             return publisher;
         }
 
+        public async Task<bool> PublisherExists(long id)
+        {
+            return await _context.Publisher.AnyAsync(p => p.Id == id);
+        }
+
         public async Task<Publisher?> UpdateAsync(long id, UpdatePublisherDTO updatePublisherDTO)
         {
             var updatedPublisher = await _context.Publisher.FirstOrDefaultAsync(p => p.Id == id);

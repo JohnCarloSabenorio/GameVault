@@ -9,7 +9,7 @@ namespace server.Mappers
 {
     public static class GamePublisherMapper
     {
-        public static GamePublisherDTO ToGamePublisherDTO(GamePublisher gamePublisher)
+        public static GamePublisherDTO ToGamePublisherDTO(this GamePublisher gamePublisher)
         {
             return new GamePublisherDTO { GameId = gamePublisher.GameId, PublisherId = gamePublisher.PublisherId };
         }
