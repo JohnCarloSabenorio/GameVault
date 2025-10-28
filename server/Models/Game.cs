@@ -32,4 +32,5 @@ public class Game
     public List<Review> Reviews { get; set; } = new List<Review>();
     public List<GameGenre> GameGenre { get; set; } = new List<GameGenre>();
     public List<GameDeveloper> GameDeveloper { get; set; } = new List<GameDeveloper>();
+    public List<GamePublisher> GamePublisher { get; set; } = new List<GamePublisher>();
 }
