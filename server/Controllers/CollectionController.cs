@@ -11,7 +11,7 @@ using server.Mappers;
 namespace server.Controllers
 {
 
-    [Route("api/game-collection")]
+    [Route("api/collection")]
     [ApiController]
     public class CollectionController : ControllerBase
     {
@@ -38,7 +38,7 @@ namespace server.Controllers
 
             if (collection == null)
             {
-                return NotFound("Game collection does not exist.");
+                return NotFound("Collection does not exist.");
             }
 
             return Ok(collection.ToCollectionDTO());
@@ -71,7 +71,7 @@ namespace server.Controllers
 
             if (updatedCollection == null)
             {
-                return NotFound("Game collection does not exist.");
+                return NotFound("Collection does not exist.");
             }
 
             return Ok(updatedCollection.ToCollectionDTO());
@@ -85,7 +85,7 @@ namespace server.Controllers
 
             if (collection == null)
             {
-                return NotFound("Game collection does not exist.");
+                return NotFound("Collection does not exist.");
             }
 
             return NoContent();
