@@ -22,6 +22,7 @@ public class ApplicationDBContext : IdentityDbContext<User>
     public DbSet<Status> Status { get; set; }
     public DbSet<Image> Image { get; set; }
     public DbSet<News> News { get; set; }
+    public DbSet<Collection> Collection { get; set; }
     public DbSet<Developer> Developer { get; set; }
     public DbSet<Publisher> Publisher { get; set; }
     public DbSet<Tag> Tag { get; set; }
@@ -33,7 +34,7 @@ public class ApplicationDBContext : IdentityDbContext<User>
     public DbSet<GamePublisher> GamePublisher { get; set; }
     public DbSet<GameEngine> GameEngine { get; set; }
     public DbSet<GameMode> GameMode { get; set; }
-    public DbSet<Collection> Collection { get; set; }
+    public DbSet<GameCollection> GameCollection { get; set; }
     protected override void OnModelCreating(ModelBuilder builder)
     {
         base.OnModelCreating(builder);
@@ -42,6 +43,7 @@ public class ApplicationDBContext : IdentityDbContext<User>
         builder.Entity<GameGenre>(x => x.HasKey(p => new { p.GenreId, p.GameId }));
         builder.Entity<GameDeveloper>(x => x.HasKey(p => new { p.GameId, p.DeveloperId }));
         builder.Entity<GamePublisher>(x => x.HasKey(p => new { p.GameId, p.PublisherId }));
+        builder.Entity<GameCollection>(x => x.HasKey(p => new { p.CollectionId, p.GameId }));
 
         // Many-to-many Relationship
         builder.Entity<GameGenre>().HasOne(x => x.Game).WithMany(x => x.GameGenre).HasForeignKey(p => p.GameId);
@@ -52,6 +54,9 @@ public class ApplicationDBContext : IdentityDbContext<User>
 
         builder.Entity<GamePublisher>().HasOne(x => x.Game).WithMany(x => x.GamePublisher).HasForeignKey(p => p.GameId);
         builder.Entity<GamePublisher>().HasOne(x => x.Publisher).WithMany(x => x.GamePublisher).HasForeignKey(p => p.PublisherId);
+
+        builder.Entity<GameCollection>().HasOne(x => x.Game).WithMany(x => GameCollection).HasForeignKey(p => p.GameId);
+        builder.Entity<GameCollection>().HasOne(x => x.Collection).WithMany(x => GameCollection).HasForeignKey(p => p.CollectionId);
 
         List<IdentityRole> roles = new List<IdentityRole>
         {

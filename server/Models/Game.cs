@@ -33,4 +33,5 @@ public class Game
     public List<GameGenre> GameGenre { get; set; } = new List<GameGenre>();
     public List<GameDeveloper> GameDeveloper { get; set; } = new List<GameDeveloper>();
     public List<GamePublisher> GamePublisher { get; set; } = new List<GamePublisher>();
+    public List<GameCollection> GameCollection { get; set; } = new List<GameCollection>();
 }

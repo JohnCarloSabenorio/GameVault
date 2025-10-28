@@ -17,5 +17,7 @@ namespace server.Models
         public User? User { get; set; }
         public DateTime CreatedAt { get; set; } = DateTime.Now;
         public DateTime UpdatedAt { get; set; } = DateTime.Now;
+        public List<GameCollection> GameCollection { get; set; } = new List<GameCollection>();
+
     }
 }
