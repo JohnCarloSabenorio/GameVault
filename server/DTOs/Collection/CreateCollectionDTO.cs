@@ -4,9 +4,9 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace server.DTOs.GameCOllection
+namespace server.DTOs.Collection
 {
-    public class CreateGameCollectionDTO
+    public class CreateCollectionDTO
     {
         [Required]
         public string? UserId { get; set; }

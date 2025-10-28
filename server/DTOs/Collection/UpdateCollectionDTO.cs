@@ -4,9 +4,9 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace server.DTOs.GameCOllection
+namespace server.DTOs.Collection
 {
-    public class UpdateGameCollectionDTO
+    public class UpdateCollectionDTO
     {
         [Required]
         [MinLength(1, ErrorMessage = "Game collection name must be atleast 1 character long.")]

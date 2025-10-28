@@ -33,7 +33,7 @@ public class ApplicationDBContext : IdentityDbContext<User>
     public DbSet<GamePublisher> GamePublisher { get; set; }
     public DbSet<GameEngine> GameEngine { get; set; }
     public DbSet<GameMode> GameMode { get; set; }
-    public DbSet<GameCollection> GameCollection { get; set; }
+    public DbSet<Collection> Collection { get; set; }
     protected override void OnModelCreating(ModelBuilder builder)
     {
         base.OnModelCreating(builder);
@@ -52,7 +52,7 @@ public class ApplicationDBContext : IdentityDbContext<User>
 
         builder.Entity<GamePublisher>().HasOne(x => x.Game).WithMany(x => x.GamePublisher).HasForeignKey(p => p.GameId);
         builder.Entity<GamePublisher>().HasOne(x => x.Publisher).WithMany(x => x.GamePublisher).HasForeignKey(p => p.PublisherId);
-        
+
         List<IdentityRole> roles = new List<IdentityRole>
         {
             new IdentityRole

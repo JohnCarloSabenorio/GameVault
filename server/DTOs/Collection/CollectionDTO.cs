@@ -4,9 +4,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using server.Models;
 
-namespace server.DTOs.GameCOllection
+namespace server.DTOs.Collection
 {
-    public class GameCollectionDTO
+    public class CollectionDTO
     {
 
         public string Name { get; set; } = string.Empty;
