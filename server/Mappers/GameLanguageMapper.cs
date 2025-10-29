@@ -9,7 +9,7 @@ namespace server.Mappers
 {
     public static class GameLanguageMapper
     {
-        public static GameLanguageDTO ToGameLanguageDTO(GameLanguage gameLanguage)
+        public static GameLanguageDTO ToGameLanguageDTO(this GameLanguage gameLanguage)
         {
             return new GameLanguageDTO { GameId = gameLanguage.GameId, LanguageId = gameLanguage.LanguageId };
         }

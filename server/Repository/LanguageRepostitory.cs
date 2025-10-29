@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using NuGet.LibraryModel;
 using server.Data;
 using server.DTOs.Language;
 using server.Helpers;
@@ -79,6 +80,11 @@ namespace server.Repository
             }
 
             return language;
+        }
+
+        public async Task<bool> LanguageExists(long id)
+        {
+            return await _context.Language.AnyAsync(l => l.Id == id);
         }
 
         public async Task<Language?> UpdateAsync(long id, UpdateLanguageDTO updateLanguageDTO)

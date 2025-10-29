@@ -18,4 +18,5 @@ public interface ILanguageRepo
     // Delete
     Task<Language?> DeleteAsync(long id);
 
+    Task<bool> LanguageExists(long id);
 }
