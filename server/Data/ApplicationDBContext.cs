@@ -30,7 +30,7 @@ public class ApplicationDBContext : IdentityDbContext<User>
     public DbSet<Tag> Tag { get; set; }
     public DbSet<Video> Video { get; set; }
     public DbSet<Language> Language { get; set; }
-    public DbSet<GamePlatform> GamePlatform { get; set; }
+    public DbSet<Platform> Platform { get; set; }
     public DbSet<GameGenre> GameGenre { get; set; }
     public DbSet<GameEngine> GameEngine { get; set; }
     public DbSet<GameMode> GameMode { get; set; }
