@@ -15,5 +15,6 @@ namespace server.Interfaces
         Task<Video> CreateAsync(CreateVideoDTO createVideoDTO);
         Task<Video?> UpdateAsync(long id, UpdateVIdeoDTO updateVIdeoDTO);
         Task<Video?> DeleteAsync(long id);
+        Task<bool> VideoExists(long id);
     }
 }

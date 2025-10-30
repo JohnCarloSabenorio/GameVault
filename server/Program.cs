@@ -116,6 +116,7 @@ builder.Services.AddScoped<IGameLanguageRepo, GameLanguageRepository>();
 builder.Services.AddScoped<IGameModeRepo, GameModeRepository>();
 builder.Services.AddScoped<IGamePlatformRepo, GamePlatformRepository>();
 builder.Services.AddScoped<IGameTagRepo, GameTagRepository>();
+builder.Services.AddScoped<IGameVideoRepo, GameVideoRepository>();
 builder.Services.AddScoped<ITokenService, TokenService>();
 
 builder.Services.AddHttpClient<IGDBService>(service =>

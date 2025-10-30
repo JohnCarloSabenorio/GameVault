@@ -87,5 +87,10 @@ namespace server.Repository
 
             return updatedVideo;
         }
+
+        public async Task<bool> VideoExists(long id)
+        {
+            return await _context.Video.AnyAsync(v => v.Id == id);
+        }
     }
 }
