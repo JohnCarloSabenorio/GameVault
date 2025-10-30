@@ -40,4 +40,5 @@ public class Game
     public List<GamePlatform> GamePlatform { get; set; } = new List<GamePlatform>();
     public List<GameTag> GameTag { get; set; } = new List<GameTag>();
     public List<GameVideo> GameVideo { get; set; } = new List<GameVideo>();
+    public List<GameImage> GameImage { get; set; } = new List<GameImage>();
 }

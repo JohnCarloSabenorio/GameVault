@@ -5,14 +5,13 @@ using System.Threading.Tasks;
 
 namespace server.Models
 {
-    public class Image
+    public class GameImage
     {
-        public long Id { get; set; }
-
-        public string Name { get; set; } = String.Empty;
+        public long GameId { get; set; }
+        public long ImageId { get; set; }
         public DateTime CreatedAt { get; set; } = DateTime.Now;
         public DateTime UpdatedAt { get; set; } = DateTime.Now;
-        public List<GameImage> GameImage { get; set; } = new List<GameImage>();
-
+        public Game? Game { get; set; }
+        public Image? Image { get; set; }
     }
 }
