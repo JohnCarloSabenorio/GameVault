@@ -40,7 +40,7 @@ namespace server.Controllers
             }
             if (!await _platformRepo.PlatformExists(platformId))
             {
-                return BadRequest("Game does not exist.");
+                return BadRequest("Platform does not exist.");
             }
 
             if (await _gamePlatformRepo.GamePlatformExists(gameId, platformId))
