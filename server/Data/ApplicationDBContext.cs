@@ -26,15 +26,16 @@ public class ApplicationDBContext : IdentityDbContext<User>
     public DbSet<Collection> Collection { get; set; }
     public DbSet<Developer> Developer { get; set; }
     public DbSet<Publisher> Publisher { get; set; }
+    public DbSet<Mode> Mode { get; set; }
     public DbSet<Tag> Tag { get; set; }
     public DbSet<Video> Video { get; set; }
     public DbSet<Language> Language { get; set; }
     public DbSet<GamePlatform> GamePlatform { get; set; }
     public DbSet<GameGenre> GameGenre { get; set; }
     public DbSet<GameEngine> GameEngine { get; set; }
+    public DbSet<GameMode> GameMode { get; set; }
     public DbSet<GameDeveloper> GameDeveloper { get; set; }
     public DbSet<GamePublisher> GamePublisher { get; set; }
-    public DbSet<Mode> Mode { get; set; }
     public DbSet<GameCollection> GameCollection { get; set; }
     public DbSet<GameLanguage> GameLanguage { get; set; }
     protected override void OnModelCreating(ModelBuilder builder)
@@ -48,6 +49,8 @@ public class ApplicationDBContext : IdentityDbContext<User>
         builder.Entity<GameCollection>(x => x.HasKey(p => new { p.CollectionId, p.GameId }));
         builder.Entity<GameLanguage>(x => x.HasKey(p => new { p.GameId, p.LanguageId }));
         builder.Entity<GameEngine>(x => x.HasKey(p => new { p.GameId, p.EngineId }));
+        builder.Entity<GameMode>(x => x.HasKey(p => new { p.GameId, p.ModeId }));
+
         // Many-to-many Relationship
         builder.Entity<GameGenre>().HasOne(x => x.Game).WithMany(x => x.GameGenre).HasForeignKey(p => p.GameId);
         builder.Entity<GameGenre>().HasOne(x => x.Genre).WithMany(x => x.GameGenre).HasForeignKey(p => p.GenreId);
@@ -66,6 +69,10 @@ public class ApplicationDBContext : IdentityDbContext<User>
 
         builder.Entity<GameEngine>().HasOne(x => x.Game).WithMany(x => x.GameEngine).HasForeignKey(p => p.GameId);
         builder.Entity<GameEngine>().HasOne(x => x.Engine).WithMany(x => x.GameEngine).HasForeignKey(p => p.EngineId);
+
+        builder.Entity<GameMode>().HasOne(x => x.Game).WithMany(x => x.GameMode).HasForeignKey(p => p.GameId);
+        builder.Entity<GameMode>().HasOne(x => x.Mode).WithMany(x => x.GameMode).HasForeignKey(p => p.ModeId);
+
         List<IdentityRole> roles = new List<IdentityRole>
         {
             new IdentityRole

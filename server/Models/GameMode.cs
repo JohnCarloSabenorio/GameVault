@@ -5,12 +5,13 @@ using System.Threading.Tasks;
 
 namespace server.Models
 {
-    public class Mode
+    public class GameMode
     {
-        public long Id { get; set; }
-        public string? Name { get; set; }
+        public long GameId { get; set; }
+        public long ModeId { get; set; }
         public DateTime CreatedAt { get; set; } = DateTime.Now;
         public DateTime UpdatedAt { get; set; } = DateTime.Now;
-        public List<GameMode> GameMode { get; set; } = new List<GameMode>();
+        public Game? Game { get; set; }
+        public Mode? Mode { get; set; }
     }
 }
