@@ -75,6 +75,10 @@ namespace server.Repository
             return platform;
         }
 
+        public async Task<bool> PlatformExists(long id)
+        {
+            return await _context.Platform.AnyAsync(p => p.Id == id);
+        }
 
         public async Task<Platform?> UpdateAsync(long id, UpdatePlatformDTO updatePlatformDTO)
         {

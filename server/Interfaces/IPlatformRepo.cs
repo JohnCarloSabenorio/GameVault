@@ -14,5 +14,6 @@ namespace server.Interfaces
         Task<Platform> CreateAsync(CreatePlatformDTO createPlatformDTO);
         Task<Platform?> UpdateAsync(long id, UpdatePlatformDTO updatePlatformDTO);
         Task<Platform?> DeleteAsync(long id);
+        Task<bool> PlatformExists(long id);
     }
 }

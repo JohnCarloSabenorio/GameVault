@@ -11,7 +11,7 @@ using server.Models;
 
 namespace server.Controllers
 {
-    [Route("api/game-platform")]
+    [Route("api/platform")]
     [ApiController]
     public class PlatformController : ControllerBase
     {
