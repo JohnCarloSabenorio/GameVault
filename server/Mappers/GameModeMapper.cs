@@ -9,7 +9,7 @@ namespace server.Mappers
 {
     public static class GameModeMapper
     {
-        public static GameModeDTO ToGameModeDto(GameMode gameMode)
+        public static GameModeDTO ToGameModeDTO(this GameMode gameMode)
         {
             return new GameModeDTO { GameId = gameMode.GameId, ModeId = gameMode.ModeId };
         }

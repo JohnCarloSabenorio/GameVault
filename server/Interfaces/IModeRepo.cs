@@ -15,5 +15,7 @@ namespace server.Interfaces
         Task<Mode> CreateAsync(CreateModeDTO createModeDTO);
         Task<Mode?> UpdateAsync(long id, UpdateModeDTO updateModeDTO);
         Task<Mode?> DeleteAsync(long id);
+
+        Task<bool> ModeExists(long id);
     }
 }

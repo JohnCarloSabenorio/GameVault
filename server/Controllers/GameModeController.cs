@@ -3,82 +3,60 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using server.DTOs.Mode;
-using server.Helpers;
 using server.Interfaces;
 using server.Mappers;
+using server.Models;
 
 namespace server.Controllers
 {
-    [Route("api/mode")]
+    [Route("api/game-mode")]
     [ApiController]
-    public class ModeController : ControllerBase
+    public class GameModeController : ControllerBase
     {
+        private readonly IGameRepo _gameRepo;
         private readonly IModeRepo _modeRepo;
-        public ModeController(IModeRepo modeRepo)
+        private readonly IGameModeRepo _gameModeRepo;
+        public GameModeController(IGameRepo gameRepo, IModeRepo modeRepo, IGameModeRepo gameModeRepo)
         {
+            _gameRepo = gameRepo;
             _modeRepo = modeRepo;
+            _gameModeRepo = gameModeRepo;
         }
 
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<ModeDTO>>> GetAll([FromQuery] ModeQueryObject modeQueryObject)
+        [HttpGet("{gameId:long}")]
+        public async Task<ActionResult<List<Mode>>> GetGameModes([FromRoute] long gameId)
         {
-            var modes = await _modeRepo.GetAllAsync(modeQueryObject);
-
-            var modeDtos = modes.Select(m => m.ToModeDTO());
-
-            return Ok(modeDtos);
+            return Ok(await _gameModeRepo.GetGameModes(gameId));
         }
 
-        [HttpGet("{id:long}")]
-        public async Task<ActionResult<ModeDTO>> GetById(long id)
+        [HttpPost("{gameId:long}")]
+        public async Task<ActionResult<Mode>> Create([FromRoute] long gameId, long modeId)
         {
-            var mode = await _modeRepo.GetByIdAsync(id);
-
-            if (mode == null)
+            if (!await _gameRepo.GameExists(gameId))
             {
-                return NotFound("Game mode does not exist.");
+                return BadRequest("Game does not exist.");
+            }
+            if (!await _modeRepo.ModeExists(modeId))
+            {
+                return BadRequest("Mode does not exist.");
             }
 
-            return Ok(mode.ToModeDTO());
-        }
-
-        [HttpPost]
-        public async Task<ActionResult<ModeDTO>> Create(CreateModeDTO createModeDTO)
-        {
-            if (!ModelState.IsValid)
+            if (await _gameModeRepo.GameModeExists(gameId, modeId))
             {
-                return BadRequest(ModelState);
+                return BadRequest("Cannot add the same game mode.");
             }
 
-            var newMode = await _modeRepo.CreateAsync(createModeDTO);
-            return CreatedAtAction(nameof(GetById), new { id = newMode.Id }, newMode.ToModeDTO());
+            var newGameMode = await _gameModeRepo.CreateAsync(gameId, modeId);
+
+            return CreatedAtAction(nameof(GetGameModes), new { gameId = newGameMode.GameId }, newGameMode.ToGameModeDTO());
         }
 
-        [HttpPut("{id:long}")]
-        public async Task<ActionResult<ModeDTO>> Update(long id, UpdateModeDTO updateModeDTO)
+        [HttpDelete("{gameId:long}")]
+        public async Task<IActionResult> Delete(long gameId, long modeId)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
+            var deletedGameMode = await _gameModeRepo.DeleteAsync(gameId, modeId);
 
-            var updatedMode = await _modeRepo.UpdateAsync(id, updateModeDTO);
-
-            if (updatedMode == null)
-            {
-                return NotFound("Game mode does not exist.");
-            }
-
-            return Ok(updatedMode.ToModeDTO());
-        }
-
-        [HttpDelete]
-        public async Task<IActionResult> Delete(long id)
-        {
-            var deletedMode = await _modeRepo.DeleteAsync(id);
-
-            if (deletedMode == null)
+            if (deletedGameMode == null)
             {
                 return NotFound("Game mode does not exist.");
             }

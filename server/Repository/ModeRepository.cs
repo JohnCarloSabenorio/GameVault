@@ -73,6 +73,11 @@ namespace server.Repository
             return mode;
         }
 
+        public async Task<bool> ModeExists(long id)
+        {
+            return await _context.Mode.AnyAsync(m => m.Id == id);
+        }
+
         public async Task<Mode?> UpdateAsync(long id, UpdateModeDTO updateModeDTO)
         {
             var updatedMode = await _context.Mode.FirstOrDefaultAsync(m => m.Id == id);
