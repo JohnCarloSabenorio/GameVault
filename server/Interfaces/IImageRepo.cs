@@ -15,5 +15,6 @@ namespace server.Interfaces
         Task<Image> CreateAsync(CreateImageDTO createImageDTO);
         Task<Image?> UpdateAsync(long id, UpdateImageDTO updateImageDTO);
         Task<Image?> DeleteAsync(long id);
+        Task<bool> ImageExists(long id);
     }
 }

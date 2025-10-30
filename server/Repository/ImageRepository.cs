@@ -75,6 +75,11 @@ namespace server.Repository
             return image;
         }
 
+        public async Task<bool> ImageExists(long id)
+        {
+            return await _context.Image.AnyAsync(i => i.Id == id);
+        }
+
         public async Task<Image?> UpdateAsync(long id, UpdateImageDTO updateImageDTO)
         {
             var image = await _context.Image.FirstOrDefaultAsync(i => i.Id == id);

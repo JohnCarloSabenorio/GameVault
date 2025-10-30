@@ -9,7 +9,7 @@ namespace server.Interfaces
     public interface IGameImageRepo
     {
         Task<List<Image>> GetGameImages(long gameId);
-        Task<GameImage> Create(long gameId, long imageId);
+        Task<GameImage> CreateAsync(long gameId, long imageId);
         Task<GameImage?> DeleteAsync(long gameId, long imageId);
         Task<bool> GameImageExists(long gameId, long imageId);
     }

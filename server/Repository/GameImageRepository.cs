@@ -16,7 +16,7 @@ namespace server.Repository
         {
             _context = context;
         }
-        public async Task<GameImage> Create(long gameId, long imageId)
+        public async Task<GameImage> CreateAsync(long gameId, long imageId)
         {
             var newGameImage = new GameImage { GameId = gameId, ImageId = imageId };
 
