@@ -20,7 +20,7 @@ public class GameRepository : IGameRepo
     }
     public async Task<Game> CreateAsync(CreateGameDTO createGameDTO)
     {
-        // Convert the createDTO to GameModel
+        // Convert the createDTO
         var gameData = createGameDTO.ToGameFromCreateDTO();
 
         await _context.Game.AddAsync(gameData);

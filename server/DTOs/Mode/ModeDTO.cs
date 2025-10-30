@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace server.DTOs.GameMode
+namespace server.DTOs.Mode
 {
-    public class GameModeDTO
+    public class ModeDTO
     {
         public string? Name { get; set; }
     }

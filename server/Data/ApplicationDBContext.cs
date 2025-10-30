@@ -34,7 +34,7 @@ public class ApplicationDBContext : IdentityDbContext<User>
     public DbSet<GameEngine> GameEngine { get; set; }
     public DbSet<GameDeveloper> GameDeveloper { get; set; }
     public DbSet<GamePublisher> GamePublisher { get; set; }
-    public DbSet<GameMode> GameMode { get; set; }
+    public DbSet<Mode> Mode { get; set; }
     public DbSet<GameCollection> GameCollection { get; set; }
     public DbSet<GameLanguage> GameLanguage { get; set; }
     protected override void OnModelCreating(ModelBuilder builder)

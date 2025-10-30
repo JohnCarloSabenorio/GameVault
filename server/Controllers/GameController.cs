@@ -64,7 +64,7 @@ public class GameController : ControllerBase
             return BadRequest(ModelState);
         }
 
-        // Create game using the GameModel
+        // Create game
         var game = await _gameRepo.CreateAsync(createGameDTO);
 
         // Return game DTO

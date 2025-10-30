@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace server.Helpers
 {
-    public class GameModeQueryObject
+    public class ModeQueryObject
     {
         public string? SortBy { get; set; } = null;
         public bool IsDescending { get; set; } = false;
