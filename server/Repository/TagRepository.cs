@@ -73,6 +73,11 @@ namespace server.Repository
             return tag;
         }
 
+        public async Task<bool> TagExists(long id)
+        {
+            return await _context.Tag.AnyAsync(t => t.Id == id);
+        }
+
         public async Task<Tag?> UpdateAsync(long id, UpdateTagDTO updateTagDTO)
         {
             var updatedTag = await _context.Tag.FirstOrDefaultAsync(t => t.Id == id);

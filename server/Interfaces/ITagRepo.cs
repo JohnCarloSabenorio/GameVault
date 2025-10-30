@@ -15,5 +15,7 @@ namespace server.Interfaces
         Task<Tag> CreateAysnc(CreateTagDTO createTagDTO);
         Task<Tag?> UpdateAsync(long id, UpdateTagDTO updateTagDTO);
         Task<Tag?> DeleteAsync(long id);
+
+        Task<bool> TagExists(long id);
     }
 }
