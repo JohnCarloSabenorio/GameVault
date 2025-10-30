@@ -9,5 +9,7 @@ namespace server.Models
     {
         public long Id { get; set; }
         public string? Name { get; set; }
+        public List<GameTag> GameTag { get; set; } = new List<GameTag>();
+
     }
 }
