@@ -15,7 +15,8 @@ namespace server.Models
         public long? LogoId { get; set; }
         public DateTime CreatedAt { get; set; } = DateTime.Now;
         public DateTime UpdatedAt { get; set; } = DateTime.Now;
-
         public Image? Logo { get; set; }
+        public List<GamePlatform> GamePlatform { get; set; } = new List<GamePlatform>();
+
     }
 }

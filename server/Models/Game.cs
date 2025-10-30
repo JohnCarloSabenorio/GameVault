@@ -37,4 +37,5 @@ public class Game
     public List<GameLanguage> GameLanguage { get; set; } = new List<GameLanguage>();
     public List<GameEngine> GameEngine { get; set; } = new List<GameEngine>();
     public List<GameMode> GameMode { get; set; } = new List<GameMode>();
+    public List<GamePlatform> GamePlatform { get; set; } = new List<GamePlatform>();
 }
