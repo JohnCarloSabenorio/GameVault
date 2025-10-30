@@ -21,6 +21,7 @@ public class ApplicationDBContext : IdentityDbContext<User>
     public DbSet<Franchise> Franchise { get; set; }
     public DbSet<Status> Status { get; set; }
     public DbSet<Image> Image { get; set; }
+    public DbSet<Engine> Engine { get; set; }
     public DbSet<News> News { get; set; }
     public DbSet<Collection> Collection { get; set; }
     public DbSet<Developer> Developer { get; set; }
@@ -30,9 +31,9 @@ public class ApplicationDBContext : IdentityDbContext<User>
     public DbSet<Language> Language { get; set; }
     public DbSet<GamePlatform> GamePlatform { get; set; }
     public DbSet<GameGenre> GameGenre { get; set; }
+    public DbSet<GameEngine> GameEngine { get; set; }
     public DbSet<GameDeveloper> GameDeveloper { get; set; }
     public DbSet<GamePublisher> GamePublisher { get; set; }
-    public DbSet<Engine> Engine { get; set; }
     public DbSet<GameMode> GameMode { get; set; }
     public DbSet<GameCollection> GameCollection { get; set; }
     public DbSet<GameLanguage> GameLanguage { get; set; }
@@ -46,6 +47,7 @@ public class ApplicationDBContext : IdentityDbContext<User>
         builder.Entity<GamePublisher>(x => x.HasKey(p => new { p.GameId, p.PublisherId }));
         builder.Entity<GameCollection>(x => x.HasKey(p => new { p.CollectionId, p.GameId }));
         builder.Entity<GameLanguage>(x => x.HasKey(p => new { p.GameId, p.LanguageId }));
+        builder.Entity<GameEngine>(x => x.HasKey(p => new { p.GameId, p.EngineId }));
         // Many-to-many Relationship
         builder.Entity<GameGenre>().HasOne(x => x.Game).WithMany(x => x.GameGenre).HasForeignKey(p => p.GameId);
         builder.Entity<GameGenre>().HasOne(x => x.Genre).WithMany(x => x.GameGenre).HasForeignKey(p => p.GenreId);
@@ -61,7 +63,9 @@ public class ApplicationDBContext : IdentityDbContext<User>
 
         builder.Entity<GameLanguage>().HasOne(x => x.Game).WithMany(x => x.GameLanguage).HasForeignKey(p => p.GameId);
         builder.Entity<GameLanguage>().HasOne(x => x.Language).WithMany(x => x.GameLanguage).HasForeignKey(p => p.LanguageId);
-        
+
+        builder.Entity<GameEngine>().HasOne(x => x.Game).WithMany(x => x.GameEngine).HasForeignKey(p => p.GameId);
+        builder.Entity<GameEngine>().HasOne(x => x.Engine).WithMany(x => x.GameEngine).HasForeignKey(p => p.EngineId);
         List<IdentityRole> roles = new List<IdentityRole>
         {
             new IdentityRole

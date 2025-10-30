@@ -14,5 +14,6 @@ namespace server.Models
         public DateTime CreatedAt { get; set; } = DateTime.Now;
         public DateTime UpdatedAt { get; set; } = DateTime.Now;
         public Image? Logo { get; set; }
+        public List<GameEngine> GameEngine { get; set; } = new List<GameEngine>();
     }
 }

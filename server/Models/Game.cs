@@ -35,4 +35,5 @@ public class Game
     public List<GamePublisher> GamePublisher { get; set; } = new List<GamePublisher>();
     public List<GameCollection> GameCollection { get; set; } = new List<GameCollection>();
     public List<GameLanguage> GameLanguage { get; set; } = new List<GameLanguage>();
+    public List<GameEngine> GameEngine { get; set; } = new List<GameEngine>();
 }
