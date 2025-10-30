@@ -39,4 +39,5 @@ public class Game
     public List<GameMode> GameMode { get; set; } = new List<GameMode>();
     public List<GamePlatform> GamePlatform { get; set; } = new List<GamePlatform>();
     public List<GameTag> GameTag { get; set; } = new List<GameTag>();
+    public List<GameVideo> GameVideo { get; set; } = new List<GameVideo>();
 }
