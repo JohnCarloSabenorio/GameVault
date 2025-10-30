@@ -40,6 +40,7 @@ public class ApplicationDBContext : IdentityDbContext<User>
     public DbSet<GameLanguage> GameLanguage { get; set; }
     public DbSet<GamePlatform> GamePlatform { get; set; }
     public DbSet<GameTag> GameTag { get; set; }
+    public DbSet<GameVideo> GameVideo { get; set; }
     protected override void OnModelCreating(ModelBuilder builder)
     {
         base.OnModelCreating(builder);
@@ -54,6 +55,7 @@ public class ApplicationDBContext : IdentityDbContext<User>
         builder.Entity<GameMode>(x => x.HasKey(p => new { p.GameId, p.ModeId }));
         builder.Entity<GamePlatform>(x => x.HasKey(x => new { x.GameId, x.PlatformId }));
         builder.Entity<GameTag>(x => x.HasKey(x => new { x.GameId, x.TagId }));
+        builder.Entity<GameVideo>(x => x.HasKey(x => new { x.GameId, x.VideoId }));
 
         // Many-to-many Relationship
         builder.Entity<GameGenre>().HasOne(x => x.Game).WithMany(x => x.GameGenre).HasForeignKey(p => p.GameId);
@@ -82,6 +84,9 @@ public class ApplicationDBContext : IdentityDbContext<User>
 
         builder.Entity<GameTag>().HasOne(x => x.Game).WithMany(x => x.GameTag).HasForeignKey(p => p.GameId);
         builder.Entity<GameTag>().HasOne(x => x.Tag).WithMany(x => x.GameTag).HasForeignKey(p => p.TagId);
+
+        builder.Entity<GameVideo>().HasOne(x => x.Game).WithMany(x => x.GameVideo).HasForeignKey(p => p.GameId);
+        builder.Entity<GameVideo>().HasOne(x => x.Video).WithMany(x => x.GameVideo).HasForeignKey(p => p.VideoId);
         List<IdentityRole> roles = new List<IdentityRole>
         {
             new IdentityRole
