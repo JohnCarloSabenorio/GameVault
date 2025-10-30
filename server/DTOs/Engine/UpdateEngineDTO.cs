@@ -4,9 +4,9 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace server.DTOs.GameEngine
+namespace server.DTOs.Engine
 {
-    public class UpdateGameEngineDTO
+    public class UpdateEngineDTO
     {
         [Required]
         [MinLength(1, ErrorMessage = "Game engine name must be atleast 1 character long.")]

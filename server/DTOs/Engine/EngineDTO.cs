@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace server.DTOs.GameEngine
+namespace server.DTOs.Engine
 {
-    public class GameEngineDTO
+    public class EngineDTO
     {
         public string? Name { get; set; }
         public string? Description { get; set; }
