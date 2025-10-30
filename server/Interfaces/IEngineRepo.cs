@@ -15,5 +15,6 @@ namespace server.Interfaces
         Task<Engine> CreateAsync(CreateEngineDTO createEngineDTO);
         Task<Engine?> UpdateAsync(long id, UpdateEngineDTO updateEngineDTO);
         Task<Engine?> DeleteAsync(long id);
+        Task<bool> EngineExists(long id);
     }
 }

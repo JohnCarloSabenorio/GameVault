@@ -46,6 +46,11 @@ namespace server.Repository
             return engine;
         }
 
+        public async Task<bool> EngineExists(long id)
+        {
+            return await _context.Engine.AnyAsync(e => e.Id == id);
+        }
+
         public async Task<List<Engine>> GetAllAsync(EngineQueryObject engineQueryObject)
         {
 
