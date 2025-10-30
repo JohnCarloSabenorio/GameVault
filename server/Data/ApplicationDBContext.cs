@@ -77,6 +77,8 @@ public class ApplicationDBContext : IdentityDbContext<User>
 
         builder.Entity<GamePlatform>().HasOne(x => x.Game).WithMany(x => x.GamePlatform).HasForeignKey(p => p.GameId);
         builder.Entity<GamePlatform>().HasOne(x => x.Platform).WithMany(x => x.GamePlatform).HasForeignKey(p => p.PlatformId);
+
+        
         List<IdentityRole> roles = new List<IdentityRole>
         {
             new IdentityRole
